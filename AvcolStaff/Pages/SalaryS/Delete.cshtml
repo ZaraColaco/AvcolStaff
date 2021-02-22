@@ -1,0 +1,58 @@
+﻿@page
+@model AvcolStaff.Pages.SalaryS.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Salary</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Salary.StaffID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Salary.StaffID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Salary.SalaryGradeName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Salary.SalaryGradeName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Salary.StartRange)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Salary.StartRange)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Salary.EndRange)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Salary.EndRange)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Salary.ActualSalary)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Salary.ActualSalary)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Salary.MoeNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Salary.MoeNumber)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Salary.SalaryID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

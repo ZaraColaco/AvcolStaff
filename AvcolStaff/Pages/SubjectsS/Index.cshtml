@@ -1,0 +1,48 @@
+﻿@page
+@model AvcolStaff.Pages.SubjectsS.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Subjects[0].SubjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subjects[0].DepartmentsID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subjects[0].StandardsID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Subjects) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentsID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StandardsID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SubjectsID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SubjectsID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SubjectsID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

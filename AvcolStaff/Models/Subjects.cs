@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace AvcolStaff.Models
 {
-    public class Departments
+    public class Subjects
     {
+        public int SubjectsID { get; set; }
+        public string SubjectName { get; set; }
         public int DepartmentsID { get; set; }
-        public string DepartmentName { get; set; }
-        public string StaffId { get; set; }
+        public string StandardsID { get; set; }
     }
 }

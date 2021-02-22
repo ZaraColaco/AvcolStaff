@@ -1,0 +1,60 @@
+﻿@page
+@model AvcolStaff.Pages.StandardsS.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Standards[0].CreditsAvaliable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Standards[0].StandardName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Standards[0].CourseCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Standards[0].StaffID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Standards[0].SubjectsID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Standards) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditsAvaliable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StandardName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StaffID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectsID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.StandardsID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.StandardsID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.StandardsID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -20,6 +20,7 @@ namespace AvcolStaff.Models
         public string EmailAddress { get; set; }
         public int SalaryID { get; set; }
         public int BankAccount { get; set; }
+        [Key]
         public int StaffID { get; set; }
 
     }

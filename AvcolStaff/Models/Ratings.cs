@@ -12,6 +12,8 @@ namespace AvcolStaff.Models
         [Key]
         public int StaffID { get; set; }
         public int Experience_Years { get; set; }
-        public Ratings ReviewStars { get; set; }//whats the data type of a star rater
-    }
+        [Range(0,5)]
+        public int ReviewStars { get; set; }
+        public Staff Staff { get; set; }
+    } 
 }

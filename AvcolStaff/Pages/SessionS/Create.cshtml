@@ -1,0 +1,59 @@
+﻿@page
+@model AvcolStaff.Pages.SessionS.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Sessions</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Sessions.RoomNumber" class="control-label"></label>
+                <input asp-for="Sessions.RoomNumber" class="form-control" />
+                <span asp-validation-for="Sessions.RoomNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sessions.SubjectsID" class="control-label"></label>
+                <input asp-for="Sessions.SubjectsID" class="form-control" />
+                <span asp-validation-for="Sessions.SubjectsID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sessions.Period" class="control-label"></label>
+                <input asp-for="Sessions.Period" class="form-control" />
+                <span asp-validation-for="Sessions.Period" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sessions.day" class="control-label"></label>
+                <input asp-for="Sessions.day" class="form-control" />
+                <span asp-validation-for="Sessions.day" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sessions.Time" class="control-label"></label>
+                <input asp-for="Sessions.Time" class="form-control" />
+                <span asp-validation-for="Sessions.Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sessions.StandardsID" class="control-label"></label>
+                <input asp-for="Sessions.StandardsID" class="form-control" />
+                <span asp-validation-for="Sessions.StandardsID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

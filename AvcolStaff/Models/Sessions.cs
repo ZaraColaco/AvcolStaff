@@ -14,7 +14,7 @@ namespace AvcolStaff.Models
         public string SubjectsID { get; set; }
         public int Period { get; set; }
         public string day { get; set; }
- 
+        public DateTime Time { get; set; }
         public string StandardsID { get; set; }
 
 

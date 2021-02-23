@@ -21,6 +21,7 @@ namespace AvcolStaff.Pages.RatingS
 
         public IActionResult OnGet()
         {
+        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "StaffID");
             return Page();
         }
 

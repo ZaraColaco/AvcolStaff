@@ -10,5 +10,6 @@ namespace AvcolStaff.Models
         public int DepartmentsID { get; set; }
         public string DepartmentName { get; set; }
         public string StaffId { get; set; }
+        public Staff staff { get; set; }
     }
 }

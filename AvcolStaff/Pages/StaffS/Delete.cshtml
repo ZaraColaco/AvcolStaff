@@ -1,5 +1,5 @@
 ﻿@page
-@model AvcolStaff.Pages.Staffs.DeleteModel
+@model AvcolStaff.Pages.StaffS.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -29,6 +29,12 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Staff.TeacherCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Staff.HireDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Staff.HireDate)
         </dd>
     </dl>
     

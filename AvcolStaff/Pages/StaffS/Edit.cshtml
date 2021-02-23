@@ -1,5 +1,5 @@
 ﻿@page
-@model AvcolStaff.Pages.Staffs.EditModel
+@model AvcolStaff.Pages.StaffS.EditModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -28,6 +28,11 @@
                 <label asp-for="Staff.TeacherCode" class="control-label"></label>
                 <input asp-for="Staff.TeacherCode" class="form-control" />
                 <span asp-validation-for="Staff.TeacherCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Staff.HireDate" class="control-label"></label>
+                <input asp-for="Staff.HireDate" class="form-control" />
+                <span asp-validation-for="Staff.HireDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

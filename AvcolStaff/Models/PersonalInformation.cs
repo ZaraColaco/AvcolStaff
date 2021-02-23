@@ -22,6 +22,6 @@ namespace AvcolStaff.Models
         public int BankAccount { get; set; }
         [Key]
         public int StaffID { get; set; }
-
+        public Staff Staff { get; set; }
     }
 }

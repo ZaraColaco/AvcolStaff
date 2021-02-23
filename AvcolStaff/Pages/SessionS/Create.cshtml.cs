@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.StaffS
+namespace AvcolStaff.Pages.SessionS
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace AvcolStaff.Pages.StaffS
         }
 
         [BindProperty]
-        public Staff Staff { get; set; }
+        public Sessions Sessions { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -36,7 +36,7 @@ namespace AvcolStaff.Pages.StaffS
                 return Page();
             }
 
-            _context.Staff.Add(Staff);
+            _context.Sessions.Add(Sessions);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -23,7 +23,8 @@ namespace AvcolStaff.Pages.RatingS
 
         public async Task OnGetAsync()
         {
-            Ratings = await _context.Ratings.ToListAsync();
+            Ratings = await _context.Ratings
+                .Include(r => r.Staff).ToListAsync();
         }
     }
 }

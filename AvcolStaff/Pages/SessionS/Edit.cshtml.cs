@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.RatingS
+namespace AvcolStaff.Pages.SessionS
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace AvcolStaff.Pages.RatingS
         }
 
         [BindProperty]
-        public Ratings Ratings { get; set; }
+        public Sessions Sessions { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,14 +30,12 @@ namespace AvcolStaff.Pages.RatingS
                 return NotFound();
             }
 
-            Ratings = await _context.Ratings
-                .Include(r => r.Staff).FirstOrDefaultAsync(m => m.StaffID == id);
+            Sessions = await _context.Sessions.FirstOrDefaultAsync(m => m.StaffID == id);
 
-            if (Ratings == null)
+            if (Sessions == null)
             {
                 return NotFound();
             }
-           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "StaffID");
             return Page();
         }
 
@@ -50,7 +48,7 @@ namespace AvcolStaff.Pages.RatingS
                 return Page();
             }
 
-            _context.Attach(Ratings).State = EntityState.Modified;
+            _context.Attach(Sessions).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +56,7 @@ namespace AvcolStaff.Pages.RatingS
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RatingsExists(Ratings.StaffID))
+                if (!SessionsExists(Sessions.StaffID))
                 {
                     return NotFound();
                 }
@@ -71,9 +69,9 @@ namespace AvcolStaff.Pages.RatingS
             return RedirectToPage("./Index");
         }
 
-        private bool RatingsExists(int id)
+        private bool SessionsExists(int id)
         {
-            return _context.Ratings.Any(e => e.StaffID == id);
+            return _context.Sessions.Any(e => e.StaffID == id);
         }
     }
 }

@@ -37,6 +37,67 @@ namespace AvcolStaff.Migrations
                     b.ToTable("Departments");
                 });
 
+            modelBuilder.Entity("AvcolStaff.Models.PersonalInformation", b =>
+                {
+                    b.Property<int>("StaffID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BankAccount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BirthPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CitizenStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EcRelaitonship")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmergencyContact")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IrdNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalaryID")
+                        .HasColumnType("int");
+
+                    b.HasKey("StaffID");
+
+                    b.ToTable("PersonalInformation");
+                });
+
+            modelBuilder.Entity("AvcolStaff.Models.Ratings", b =>
+                {
+                    b.Property<int>("StaffID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Experience_Years")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReviewStars")
+                        .HasColumnType("int");
+
+                    b.HasKey("StaffID");
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("AvcolStaff.Models.Salary", b =>
                 {
                     b.Property<int>("SalaryID")
@@ -65,6 +126,36 @@ namespace AvcolStaff.Migrations
                     b.HasKey("SalaryID");
 
                     b.ToTable("Salary");
+                });
+
+            modelBuilder.Entity("AvcolStaff.Models.Sessions", b =>
+                {
+                    b.Property<int>("StaffID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoomNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StandardsID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectsID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("day")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StaffID");
+
+                    b.ToTable("Sessions");
                 });
 
             modelBuilder.Entity("AvcolStaff.Models.Staff", b =>
@@ -135,6 +226,15 @@ namespace AvcolStaff.Migrations
                     b.HasKey("SubjectsID");
 
                     b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("AvcolStaff.Models.Ratings", b =>
+                {
+                    b.HasOne("AvcolStaff.Models.Staff", "Staff")
+                        .WithOne("Ratings")
+                        .HasForeignKey("AvcolStaff.Models.Ratings", "StaffID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

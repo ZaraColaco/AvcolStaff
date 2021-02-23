@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.RatingS
+namespace AvcolStaff.Pages.SessionS
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace AvcolStaff.Pages.RatingS
         }
 
         [BindProperty]
-        public Ratings Ratings { get; set; }
+        public Sessions Sessions { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,10 +29,9 @@ namespace AvcolStaff.Pages.RatingS
                 return NotFound();
             }
 
-            Ratings = await _context.Ratings
-                .Include(r => r.Staff).FirstOrDefaultAsync(m => m.StaffID == id);
+            Sessions = await _context.Sessions.FirstOrDefaultAsync(m => m.StaffID == id);
 
-            if (Ratings == null)
+            if (Sessions == null)
             {
                 return NotFound();
             }
@@ -46,11 +45,11 @@ namespace AvcolStaff.Pages.RatingS
                 return NotFound();
             }
 
-            Ratings = await _context.Ratings.FindAsync(id);
+            Sessions = await _context.Sessions.FindAsync(id);
 
-            if (Ratings != null)
+            if (Sessions != null)
             {
-                _context.Ratings.Remove(Ratings);
+                _context.Sessions.Remove(Sessions);
                 await _context.SaveChangesAsync();
             }
 

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.Staffs
+namespace AvcolStaff.Pages.StaffS
 {
     public class EditModel : PageModel
     {

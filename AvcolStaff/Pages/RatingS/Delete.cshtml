@@ -18,6 +18,18 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Ratings.Experience_Years)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ratings.ReviewStars)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ratings.ReviewStars)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ratings.Staff)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ratings.Staff.StaffID)
+        </dd>
     </dl>
     
     <form method="post">

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.StaffS
+namespace AvcolStaff.Pages.SessionS
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,11 @@ namespace AvcolStaff.Pages.StaffS
             _context = context;
         }
 
-        public IList<Staff> Staff { get;set; }
+        public IList<Sessions> Sessions { get;set; }
 
         public async Task OnGetAsync()
         {
-            Staff = await _context.Staff.ToListAsync();
+            Sessions = await _context.Sessions.ToListAsync();
         }
     }
 }

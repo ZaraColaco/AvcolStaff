@@ -27,5 +27,7 @@ namespace AvcolStaff.Data
         public DbSet<AvcolStaff.Models.Ratings> Ratings { get; set; }
 
         public DbSet<AvcolStaff.Models.PersonalInformation> PersonalInformation { get; set; }
+
+        public DbSet<AvcolStaff.Models.Sessions> Sessions { get; set; }
     }
 }

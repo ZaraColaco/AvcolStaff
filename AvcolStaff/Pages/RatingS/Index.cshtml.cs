@@ -19,11 +19,11 @@ namespace AvcolStaff.Pages.RatingS
             _context = context;
         }
 
-        public IList<Ratings> Ratings { get;set; }
+        public IList<Rating> Rating { get;set; }
 
         public async Task OnGetAsync()
         {
-            Ratings = await _context.Ratings
+            Rating = await _context.Rating
                 .Include(r => r.Staff).ToListAsync();
         }
     }

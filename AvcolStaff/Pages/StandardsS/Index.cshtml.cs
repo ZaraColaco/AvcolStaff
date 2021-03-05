@@ -14,7 +14,6 @@ namespace AvcolStaff.Pages.StandardsS
     {
         private readonly AvcolStaff.Data.AvcolStaffContext _context;
 
-
         public IndexModel(AvcolStaff.Data.AvcolStaffContext context)
         {
             _context = context;
@@ -24,7 +23,8 @@ namespace AvcolStaff.Pages.StandardsS
 
         public async Task OnGetAsync()
         {
-            Standards = await _context.Standards.ToListAsync();
+            Standards = await _context.Standards
+                .Include(s => s.Subjects).ToListAsync();
         }
     }
 }

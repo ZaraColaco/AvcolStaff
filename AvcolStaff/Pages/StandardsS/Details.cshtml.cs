@@ -21,14 +21,15 @@ namespace AvcolStaff.Pages.StandardsS
 
         public Standards Standards { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Standards = await _context.Standards.FirstOrDefaultAsync(m => m.StandardsID == id);
+            Standards = await _context.Standards
+                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.SubjectsID == id);
 
             if (Standards == null)
             {

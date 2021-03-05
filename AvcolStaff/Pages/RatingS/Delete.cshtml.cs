@@ -20,7 +20,7 @@ namespace AvcolStaff.Pages.RatingS
         }
 
         [BindProperty]
-        public Ratings Ratings { get; set; }
+        public Rating Rating { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,10 +29,10 @@ namespace AvcolStaff.Pages.RatingS
                 return NotFound();
             }
 
-            Ratings = await _context.Ratings
+            Rating = await _context.Rating
                 .Include(r => r.Staff).FirstOrDefaultAsync(m => m.StaffID == id);
 
-            if (Ratings == null)
+            if (Rating == null)
             {
                 return NotFound();
             }
@@ -46,11 +46,11 @@ namespace AvcolStaff.Pages.RatingS
                 return NotFound();
             }
 
-            Ratings = await _context.Ratings.FindAsync(id);
+            Rating = await _context.Rating.FindAsync(id);
 
-            if (Ratings != null)
+            if (Rating != null)
             {
-                _context.Ratings.Remove(Ratings);
+                _context.Rating.Remove(Rating);
                 await _context.SaveChangesAsync();
             }
 

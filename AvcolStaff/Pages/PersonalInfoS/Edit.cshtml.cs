@@ -30,12 +30,14 @@ namespace AvcolStaff.Pages.PersonalInfoS
                 return NotFound();
             }
 
-            PersonalInformation = await _context.PersonalInformation.FirstOrDefaultAsync(m => m.StaffID == id);
+            PersonalInformation = await _context.PersonalInformation
+                .Include(p => p.Staff).FirstOrDefaultAsync(m => m.StaffID == id);
 
             if (PersonalInformation == null)
             {
                 return NotFound();
             }
+           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
             return Page();
         }
 

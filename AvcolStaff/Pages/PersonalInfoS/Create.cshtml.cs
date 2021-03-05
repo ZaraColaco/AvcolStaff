@@ -21,6 +21,7 @@ namespace AvcolStaff.Pages.PersonalInfoS
 
         public IActionResult OnGet()
         {
+        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
             return Page();
         }
 

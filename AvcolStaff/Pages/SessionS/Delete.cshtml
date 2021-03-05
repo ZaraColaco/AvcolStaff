@@ -19,22 +19,16 @@
             @Html.DisplayFor(model => model.Sessions.RoomNumber)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Sessions.SubjectsID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Sessions.SubjectsID)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Sessions.Period)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Sessions.Period)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Sessions.day)
+            @Html.DisplayNameFor(model => model.Sessions.Day)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Sessions.day)
+            @Html.DisplayFor(model => model.Sessions.Day)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Sessions.Time)
@@ -43,10 +37,16 @@
             @Html.DisplayFor(model => model.Sessions.Time)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Sessions.StandardsID)
+            @Html.DisplayNameFor(model => model.Sessions.Subjects)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Sessions.StandardsID)
+            @Html.DisplayFor(model => model.Sessions.Subjects.SubjectsID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sessions.Staff)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sessions.Staff.FirstName)
         </dd>
     </dl>
     

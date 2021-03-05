@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Sessions.SubjectsID" class="control-label"></label>
-                <input asp-for="Sessions.SubjectsID" class="form-control" />
+                <select asp-for="Sessions.SubjectsID" class="form-control" asp-items="ViewBag.SubjectsID"></select>
                 <span asp-validation-for="Sessions.SubjectsID" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -30,19 +30,14 @@
                 <span asp-validation-for="Sessions.Period" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Sessions.day" class="control-label"></label>
-                <input asp-for="Sessions.day" class="form-control" />
-                <span asp-validation-for="Sessions.day" class="text-danger"></span>
+                <label asp-for="Sessions.Day" class="control-label"></label>
+                <input asp-for="Sessions.Day" class="form-control" />
+                <span asp-validation-for="Sessions.Day" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sessions.Time" class="control-label"></label>
                 <input asp-for="Sessions.Time" class="form-control" />
                 <span asp-validation-for="Sessions.Time" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Sessions.StandardsID" class="control-label"></label>
-                <input asp-for="Sessions.StandardsID" class="form-control" />
-                <span asp-validation-for="Sessions.StandardsID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -14,23 +14,17 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ratings[0].Experience_Years)
+                @Html.DisplayNameFor(model => model.Rating[0].ReviewStars)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ratings[0].ReviewStars)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ratings[0].Staff)
+                @Html.DisplayNameFor(model => model.Rating[0].Staff)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Ratings) {
+@foreach (var item in Model.Rating) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Experience_Years)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ReviewStars)
             </td>

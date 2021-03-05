@@ -17,19 +17,19 @@
                 @Html.DisplayNameFor(model => model.Sessions[0].RoomNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sessions[0].SubjectsID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Sessions[0].Period)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sessions[0].day)
+                @Html.DisplayNameFor(model => model.Sessions[0].Day)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Sessions[0].Time)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sessions[0].StandardsID)
+                @Html.DisplayNameFor(model => model.Sessions[0].Subjects)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sessions[0].Staff)
             </th>
             <th></th>
         </tr>
@@ -41,19 +41,19 @@
                 @Html.DisplayFor(modelItem => item.RoomNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SubjectsID)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Period)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.day)
+                @Html.DisplayFor(modelItem => item.Day)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Time)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StandardsID)
+                @Html.DisplayFor(modelItem => item.Subjects.SubjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staff.FullName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.StaffID">Edit</a> |

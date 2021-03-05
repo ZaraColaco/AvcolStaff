@@ -4,6 +4,19 @@
 @{
     ViewData["Title"] = "Create";
 }
+<script type="text/javascript">
+    function onNameChange() {
+        var firstName = $('#Staff_FirstName').val();
+        var lastName = $('#Staff_LastName').val();
+
+        if (firstName !== "" && lastName !== "") {
+            $('#Staff_TeacherCode').val(firstName.substring(0, 1).toUpperCase() + lastName.substring(0, 2).toUpperCase());
+            $('.staffreadonly').val(firstName.substring(0, 1).toUpperCase() + lastName.substring(0, 2).toUpperCase())
+
+        }
+
+    }
+</script>
 
 <h1>Create</h1>
 
@@ -15,17 +28,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Staff.FirstName" class="control-label"></label>
-                <input asp-for="Staff.FirstName" class="form-control" />
+                <input asp-for="Staff.FirstName" class="form-control"onchange="onNameChange()"/>
                 <span asp-validation-for="Staff.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Staff.LastName" class="control-label"></label>
-                <input asp-for="Staff.LastName" class="form-control" />
+                <input asp-for="Staff.LastName" class="form-control"onchange="onNameChange()"/>
                 <span asp-validation-for="Staff.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Staff.TeacherCode" class="control-label"></label>
-                <input asp-for="Staff.TeacherCode" class="form-control" />
+                <input asp-for="Staff.TeacherCode" readonly class="form-control" />
                 <span asp-validation-for="Staff.TeacherCode" class="text-danger"></span>
             </div>
             <div class="form-group">

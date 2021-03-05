@@ -23,7 +23,9 @@ namespace AvcolStaff.Pages.SessionS
 
         public async Task OnGetAsync()
         {
-            Sessions = await _context.Sessions.ToListAsync();
+            Sessions = await _context.Sessions
+                .Include(s => s.Staff)
+                .Include(s => s.Subjects).ToListAsync();
         }
     }
 }

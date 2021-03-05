@@ -22,14 +22,15 @@ namespace AvcolStaff.Pages.StandardsS
         [BindProperty]
         public Standards Standards { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Standards = await _context.Standards.FirstOrDefaultAsync(m => m.StandardsID == id);
+            Standards = await _context.Standards
+                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.SubjectsID == id);
 
             if (Standards == null)
             {
@@ -38,7 +39,7 @@ namespace AvcolStaff.Pages.StandardsS
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (id == null)
             {

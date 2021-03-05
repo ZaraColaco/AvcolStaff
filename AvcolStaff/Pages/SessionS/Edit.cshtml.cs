@@ -30,12 +30,16 @@ namespace AvcolStaff.Pages.SessionS
                 return NotFound();
             }
 
-            Sessions = await _context.Sessions.FirstOrDefaultAsync(m => m.StaffID == id);
+            Sessions = await _context.Sessions
+                .Include(s => s.Staff)
+                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.StaffID == id);
 
             if (Sessions == null)
             {
                 return NotFound();
             }
+           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
+           ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectsID");
             return Page();
         }
 

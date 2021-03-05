@@ -17,9 +17,6 @@
                 @Html.DisplayNameFor(model => model.PersonalInformation[0].DateOfBirth)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PersonalInformation[0].IrdNumber)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.PersonalInformation[0].Address)
             </th>
             <th>
@@ -41,10 +38,7 @@
                 @Html.DisplayNameFor(model => model.PersonalInformation[0].EmailAddress)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PersonalInformation[0].SalaryID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonalInformation[0].BankAccount)
+                @Html.DisplayNameFor(model => model.PersonalInformation[0].Staff)
             </th>
             <th></th>
         </tr>
@@ -54,9 +48,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DateOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IrdNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
@@ -80,10 +71,7 @@
                 @Html.DisplayFor(modelItem => item.EmailAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SalaryID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BankAccount)
+                @Html.DisplayFor(modelItem => item.Staff.FullName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.StaffID">Edit</a> |

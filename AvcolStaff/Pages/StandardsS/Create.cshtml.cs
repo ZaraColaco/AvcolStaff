@@ -21,6 +21,7 @@ namespace AvcolStaff.Pages.StandardsS
 
         public IActionResult OnGet()
         {
+        ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectsID");
             return Page();
         }
 

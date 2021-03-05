@@ -23,19 +23,21 @@ namespace AvcolStaff.Pages.StandardsS
         [BindProperty]
         public Standards Standards { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Standards = await _context.Standards.FirstOrDefaultAsync(m => m.StandardsID == id);
+            Standards = await _context.Standards
+                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.SubjectsID == id);
 
             if (Standards == null)
             {
                 return NotFound();
             }
+           ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectsID");
             return Page();
         }
 
@@ -56,7 +58,7 @@ namespace AvcolStaff.Pages.StandardsS
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StandardsExists(Standards.StandardsID))
+                if (!StandardsExists(Standards.SubjectsID))
                 {
                     return NotFound();
                 }
@@ -69,9 +71,9 @@ namespace AvcolStaff.Pages.StandardsS
             return RedirectToPage("./Index");
         }
 
-        private bool StandardsExists(string id)
+        private bool StandardsExists(int id)
         {
-            return _context.Standards.Any(e => e.StandardsID == id);
+            return _context.Standards.Any(e => e.SubjectsID == id);
         }
     }
 }

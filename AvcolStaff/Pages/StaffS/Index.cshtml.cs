@@ -18,12 +18,33 @@ namespace AvcolStaff.Pages.StaffS
         {
             _context = context;
         }
+        public string NameSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
+        public IList<Staff> Staff { get; set; }
+        public async Task OnGetAsync(string sortOrder)
+        {
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_ascend" : "";
+            IQueryable<Staff> StaffFnameIQ = from s in _context.Staff
+                                             select s;
 
-        public IList<Staff> Staff { get;set; }
+            switch (sortOrder)
+            {
+                case "name_ascend":
+                    StaffFnameIQ = StaffFnameIQ.OrderByDescending(s => s.LastName);
+                    break;
+                default:
+                    StaffFnameIQ = StaffFnameIQ.OrderBy(s => s.LastName);
+                    break;
+            }
 
-        public async Task OnGetAsync()
+            Staff = await StaffFnameIQ.AsNoTracking().ToListAsync();
+        }
+       
+
+       /* public async Task OnGetAsync()
         {
             Staff = await _context.Staff.ToListAsync();
-        }
+        }*/
     }
 }

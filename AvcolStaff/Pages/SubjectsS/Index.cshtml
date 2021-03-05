@@ -17,10 +17,10 @@
                 @Html.DisplayNameFor(model => model.Subjects[0].SubjectName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Subjects[0].DepartmentsID)
+                @Html.DisplayNameFor(model => model.Subjects[0].TotalCredits)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Subjects[0].StandardsID)
+                @Html.DisplayNameFor(model => model.Subjects[0].Departments)
             </th>
             <th></th>
         </tr>
@@ -32,10 +32,10 @@
                 @Html.DisplayFor(modelItem => item.SubjectName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DepartmentsID)
+                @Html.DisplayFor(modelItem => item.TotalCredits)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StandardsID)
+                @Html.DisplayFor(modelItem => item.Departments.DepartmentName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.SubjectsID">Edit</a> |

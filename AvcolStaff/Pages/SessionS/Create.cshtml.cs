@@ -21,6 +21,8 @@ namespace AvcolStaff.Pages.SessionS
 
         public IActionResult OnGet()
         {
+        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
+        ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectsID");
             return Page();
         }
 

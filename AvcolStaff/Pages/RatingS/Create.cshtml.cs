@@ -21,12 +21,12 @@ namespace AvcolStaff.Pages.RatingS
 
         public IActionResult OnGet()
         {
-        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "StaffID");
+            ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
             return Page();
         }
 
         [BindProperty]
-        public Ratings Ratings { get; set; }
+        public Rating Rating { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -37,7 +37,7 @@ namespace AvcolStaff.Pages.RatingS
                 return Page();
             }
 
-            _context.Ratings.Add(Ratings);
+            _context.Rating.Add(Rating);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

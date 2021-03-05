@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,8 +9,10 @@ namespace AvcolStaff.Models
     public class Departments
     {
         public int DepartmentsID { get; set; }
-        public string DepartmentName { get; set; }
-        public int StaffID { get; set; }
-        public Staff staff { get; set; }
+        [Display(Name = "Department Name")]
+        public string DepartmentName { get; set; }//length less than 35
+        [Display (Name= "Staff")]
+        public int? StaffID { get; set; }
+        public Staff Staff { get; set; }
     }
 }

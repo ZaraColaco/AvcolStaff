@@ -22,6 +22,10 @@ namespace AvcolStaff.Pages.PersonalInfoS
 
         [BindProperty]
         public PersonalInformation PersonalInformation { get; set; }
+        [BindProperty]
+        public int CitizenStatus { get; set; }
+        [BindProperty]
+        public int Ethnicity { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

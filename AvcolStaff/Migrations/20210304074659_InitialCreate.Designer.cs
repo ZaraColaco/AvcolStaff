@@ -54,7 +54,7 @@ namespace AvcolStaff.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BirthPlace")
+                    b.Property<string>("Ethnicity")
                         .IsRequired()
                         .HasColumnType("nvarchar(56)")
                         .HasMaxLength(56);

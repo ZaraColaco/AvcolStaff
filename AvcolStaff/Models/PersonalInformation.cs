@@ -17,30 +17,33 @@ namespace AvcolStaff.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        //[date]//need to validate the date 1985 is the earliest
+        //[date]//need to validate the date 1985 is the latest
         [Display(Name = "Date of Birth")]
         public DateTime DateOfBirth { get; set; }//has to be less than 80 years old
 
         [Required(ErrorMessage = "This field cannot be left empty")]
-        public string Address { get; set; }//need some kind of validation
+        public string Address { get; set; }
         [Phone]
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "This field cannot be left empty")]
-        public string PhoneNumber { get; set; }//10 digits
+        [StringLength(10, ErrorMessage = "Invalid Phone number")]
+        public string PhoneNumber { get; set; }
         [Display(Name = "Emergency Contact #")]
         [Required(ErrorMessage = "This field cannot be left empty")]
         [Phone]
-        public string EmergencyContact { get; set; }//10 digits
+        [StringLength(10, ErrorMessage = "Invalid Phone number")]
+        public string EmergencyContact { get; set; }
         [Display(Name = "Emergency Contact Relationship")]
+        [StringLength(56, ErrorMessage = "Invalid. Please enter a valid relationship e.g Friend, Brother etc.")]
         [Required(ErrorMessage = "This field cannot be left empty")]
-        public string EcRelaitonship { get; set; }//need something
-        [Display(Name = "NZ Citizen?")]
+        public string EcRelaitonship { get; set; }
+        [Display(Name = "Citizen Status")]
         [Required(ErrorMessage = "This field cannot be left empty")]
-        public string CitizenStatus { get; set; }// citzen or Non-citizen
+        public string CitizenStatus { get; set; }
         [Required(ErrorMessage = "This field cannot be left empty")]
         [StringLength(56, ErrorMessage = "The longest name of a country in the world is 56 charcters long ")]
-        [Display(Name = "Birth Place")]
-        public string BirthPlace { get; set; }
+        [Display(Name = "Ethnicity")]
+        public string Ethnicity { get; set; }
         [Display(Name = "Email Address")]
         [Required(ErrorMessage = "This field cannot be left empty")]
         [EmailAddress]

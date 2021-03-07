@@ -18,8 +18,8 @@ namespace AvcolStaff.Models
         [StringLength(35, ErrorMessage = "Last name cannot be longer than 35 characters.")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [Required(ErrorMessage = "This field cannot be left empty")]
-        [StringLength(3, ErrorMessage = "Teacher code must be exactly 3 characters long.")]//need to validate this
+        //[Required(ErrorMessage = "This field cannot be left empty")]
+        //[StringLength(3, ErrorMessage = "Teacher code must be exactly 3 characters long.")]//need to validate this
         [Display(Name = "Teacher Code")]
         public string TeacherCode { get; set; }
         [Required(ErrorMessage = "This field cannot be left empty")]
@@ -27,8 +27,7 @@ namespace AvcolStaff.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         //[date]//need to validate the date 1985 is the earliest
         [Display(Name = "Hire Date")]
-        public DateTime HireDate { get; set; }
-        //public int RatingID;        
+        public DateTime HireDate { get; set; }      
         [Display(Name = "Full Name")]
         public string FullName
         {

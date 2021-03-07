@@ -10,6 +10,7 @@ namespace AvcolStaff.Models
     {
         public int DepartmentsID { get; set; }
         [Display(Name = "Department Name")]
+        //[Required]
         public string DepartmentName { get; set; }//length less than 35
         [Display (Name= "Staff")]
         public int? StaffID { get; set; }

@@ -5,14 +5,14 @@
     ViewData["Title"] = "Create";
 }
 <script type="text/javascript">
-    function onNameChange() {
+    function onNameChange()
+    {
         var firstName = $('#Staff_FirstName').val();
         var lastName = $('#Staff_LastName').val();
 
-        if (firstName !== "" && lastName !== "") {
+        if (firstName !== "" && lastName !== "")
+        {
             $('#Staff_TeacherCode').val(firstName.substring(0, 1).toUpperCase() + lastName.substring(0, 2).toUpperCase());
-            $('.staffreadonly').val(firstName.substring(0, 1).toUpperCase() + lastName.substring(0, 2).toUpperCase())
-
         }
 
     }

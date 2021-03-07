@@ -2,10 +2,10 @@
 @model AvcolStaff.Pages.SubjectsS.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Subjects";
 }
 
-<h1>Index</h1>
+<h1>Subjects</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -15,9 +15,6 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Subjects[0].SubjectName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subjects[0].TotalCredits)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Subjects[0].Departments)
@@ -30,9 +27,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.SubjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalCredits)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Departments.DepartmentName)

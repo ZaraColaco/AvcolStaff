@@ -19,26 +19,34 @@ namespace AvcolStaff.Pages.StaffS
             _context = context;
         }
         public string NameSort { get; set; }
+        public string DateSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
         public IList<Staff> Staff { get; set; }
         public async Task OnGetAsync(string sortOrder)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_ascend" : "";
-            IQueryable<Staff> StaffFnameIQ = from s in _context.Staff
+            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+            IQueryable<Staff> StaffIQ = from s in _context.Staff
                                              select s;
 
             switch (sortOrder)
             {
                 case "name_ascend":
-                    StaffFnameIQ = StaffFnameIQ.OrderByDescending(s => s.LastName);
+                    StaffIQ = StaffIQ.OrderByDescending(s => s.LastName);
                     break;
                 default:
-                    StaffFnameIQ = StaffFnameIQ.OrderBy(s => s.LastName);
+                    StaffIQ = StaffIQ.OrderBy(s => s.LastName);
+                    break;
+                case "Date":
+                    StaffIQ = StaffIQ.OrderBy(s => s.HireDate);
+                    break;
+                case "date_desc":
+                    StaffIQ = StaffIQ.OrderByDescending(s => s.HireDate);
                     break;
             }
 
-            Staff = await StaffFnameIQ.AsNoTracking().ToListAsync();
+            Staff = await StaffIQ.AsNoTracking().ToListAsync();
         }
        
 

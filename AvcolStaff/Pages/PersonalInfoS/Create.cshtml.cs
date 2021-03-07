@@ -21,12 +21,16 @@ namespace AvcolStaff.Pages.PersonalInfoS
 
         public IActionResult OnGet()
         {
-        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
+        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
             return Page();
         }
 
         [BindProperty]
         public PersonalInformation PersonalInformation { get; set; }
+        [BindProperty]
+        public int CitizenStatus { get; set; }
+        [BindProperty]
+        public int Ethnicity { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.

@@ -21,14 +21,15 @@ namespace AvcolStaff.Pages.SessionS
 
         public IActionResult OnGet()
         {
-        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
-        ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectsID");
+        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+        ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
             return Page();
         }
 
         [BindProperty]
         public Sessions Sessions { get; set; }
-
+        [BindProperty]
+        public int Day { get; set; }
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()

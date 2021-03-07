@@ -28,12 +28,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Sessions.Period" class="control-label"></label>
-                <input asp-for="Sessions.Period" class="form-control" />
+                <input asp-for="Sessions.Period" class="form-control"onchange="onPeriodChange()" />
                 <span asp-validation-for="Sessions.Period" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sessions.Day" class="control-label"></label>
-                <input asp-for="Sessions.Day" class="form-control" />
+                <select select asp-for="Sessions.Day" class="form-control" name="Sessions.Day">
+                    <option value="">Select a Day</option>
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                </select>
                 <span asp-validation-for="Sessions.Day" class="text-danger"></span>
             </div>
             <div class="form-group">

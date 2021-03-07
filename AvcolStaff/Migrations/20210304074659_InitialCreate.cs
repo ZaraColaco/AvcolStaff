@@ -73,7 +73,7 @@ namespace AvcolStaff.Migrations
                     EmergencyContact = table.Column<string>(nullable: false),
                     EcRelaitonship = table.Column<string>(nullable: false),
                     CitizenStatus = table.Column<string>(nullable: false),
-                    BirthPlace = table.Column<string>(maxLength: 56, nullable: false),
+                    Ethnicity = table.Column<string>(maxLength: 56, nullable: false),
                     EmailAddress = table.Column<string>(nullable: false),
                     BankAccount = table.Column<string>(nullable: false)
                 },

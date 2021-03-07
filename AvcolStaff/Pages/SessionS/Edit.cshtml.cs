@@ -22,7 +22,8 @@ namespace AvcolStaff.Pages.SessionS
 
         [BindProperty]
         public Sessions Sessions { get; set; }
-
+        [BindProperty]
+        public int Day { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -38,8 +39,8 @@ namespace AvcolStaff.Pages.SessionS
             {
                 return NotFound();
             }
-           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
-           ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectsID");
+           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+           ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
             return Page();
         }
 

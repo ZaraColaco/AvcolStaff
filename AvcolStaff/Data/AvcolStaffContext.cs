@@ -16,7 +16,6 @@ namespace AvcolStaff.Data
 
         public DbSet<AvcolStaff.Models.Staff> Staff { get; set; }
 
-        public DbSet<AvcolStaff.Models.Salary> Salary { get; set; }
 
         public DbSet<AvcolStaff.Models.Standards> Standards { get; set; }
 

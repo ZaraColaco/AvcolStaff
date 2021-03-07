@@ -4,7 +4,26 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+    <script type="text/javascript">
+        function onPeriodChange() {
+            var Period = $('#Sessions_Period').val();
+            if (Period == 1) {
+                $('#Sessions_Time').val("9:15-10:10");
+            }
+            else if (Period == 2) {
+                $('#Sessions_Time').val("10:15-11:10");
+            }
+            else if (Period == 3) {
+                $('#Sessions_Time').val("11:35 - 12:30");
+            }
+            else if (Period == 4) {
+                $('#Sessions_Time').val("1:20 - 2:15");
+            }
+            else if (Period == 5) {
+                $('#Sessions_Time').val("2:20-3:15");
+            }
+        }
+    </script>
 <h1>Create</h1>
 
 <h4>Sessions</h4>

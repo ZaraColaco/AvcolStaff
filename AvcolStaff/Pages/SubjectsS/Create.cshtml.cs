@@ -21,7 +21,6 @@ namespace AvcolStaff.Pages.SubjectsS
 
         public IActionResult OnGet()
         {
-        ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
             return Page();
         }
 
@@ -36,11 +35,21 @@ namespace AvcolStaff.Pages.SubjectsS
             {
                 return Page();
             }
-
+            Subjects subject = (from t1 in _context.Subjects where t1.SubjectName == Subjects.SubjectName select t1).FirstOrDefault();
             _context.Subjects.Add(Subjects);
-            await _context.SaveChangesAsync();
-
+            if (subject != null)
+            {
+                ModelState.AddModelError("Custom", "Subject already exists");
+                return Page();
+            }
+            else
+            {
+                _context.Subjects.Add(Subjects);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToPage("./Index");
         }
+            
     }
 }
+

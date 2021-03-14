@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.RatingS
+namespace AvcolStaff.Pages.DepartmentStaffS
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace AvcolStaff.Pages.RatingS
         }
 
         [BindProperty]
-        public Rating Rating { get; set; }
+        public DepartmentStaff DepartmentStaff { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,13 +30,15 @@ namespace AvcolStaff.Pages.RatingS
                 return NotFound();
             }
 
-            Rating = await _context.Rating
-                .Include(r => r.Staff).FirstOrDefaultAsync(m => m.StaffID == id);
+            DepartmentStaff = await _context.DepartmentStaff
+                .Include(d => d.Departments)
+                .Include(d => d.Staff).FirstOrDefaultAsync(m => m.DepartmentStaffID == id);
 
-            if (Rating == null)
+            if (DepartmentStaff == null)
             {
                 return NotFound();
             }
+           ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
            ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
             return Page();
         }
@@ -49,7 +51,23 @@ namespace AvcolStaff.Pages.RatingS
             {
                 return Page();
             }
-            _context.Attach(Rating).State = EntityState.Modified;
+            DepartmentStaff staff = (from t1 in _context.DepartmentStaff
+                                     where t1.StaffID == DepartmentStaff.StaffID
+                                     && t1.DepartmentsID == DepartmentStaff.DepartmentsID
+                                     select t1).FirstOrDefault();
+            if (staff != null)
+            {
+                ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
+                ViewData["StaffID"] = new SelectList(_context.Subjects, "Staff", "FullName");
+                ModelState.AddModelError("Custom", "Staff has already been asigned to the same department");
+                return Page();
+            }
+            else
+            {
+                _context.DepartmentStaff.Add(DepartmentStaff);
+                await _context.SaveChangesAsync();
+            }
+            _context.Attach(DepartmentStaff).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +75,7 @@ namespace AvcolStaff.Pages.RatingS
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RatingExists(Rating.StaffID))
+                if (!DepartmentStaffExists(DepartmentStaff.DepartmentStaffID))
                 {
                     return NotFound();
                 }
@@ -70,9 +88,9 @@ namespace AvcolStaff.Pages.RatingS
             return RedirectToPage("./Index");
         }
 
-        private bool RatingExists(int id)
+        private bool DepartmentStaffExists(int id)
         {
-            return _context.Rating.Any(e => e.StaffID == id);
+            return _context.DepartmentStaff.Any(e => e.DepartmentStaffID == id);
         }
     }
 }

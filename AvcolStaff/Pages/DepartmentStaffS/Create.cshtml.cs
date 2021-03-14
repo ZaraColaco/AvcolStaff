@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.RatingS
+namespace AvcolStaff.Pages.DepartmentStaffS
 {
     public class CreateModel : PageModel
     {
@@ -21,12 +21,13 @@ namespace AvcolStaff.Pages.RatingS
 
         public IActionResult OnGet()
         {
-        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+            ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
+            ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
             return Page();
         }
 
         [BindProperty]
-        public Rating Rating { get; set; }
+        public DepartmentStaff DepartmentStaff { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -36,20 +37,24 @@ namespace AvcolStaff.Pages.RatingS
             {
                 return Page();
             }
-            Rating rating = (from t1 in _context.Rating where t1.StaffID == Rating.StaffID select t1).FirstOrDefault();
-            if (rating != null)
+            DepartmentStaff staff = (from t1 in _context.DepartmentStaff
+                                      where t1.StaffID == DepartmentStaff.StaffID 
+                                      && t1.DepartmentsID == DepartmentStaff.DepartmentsID
+                                      select t1).FirstOrDefault();
+            if (staff != null)
             {
-                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
-                ModelState.AddModelError("Custom", "This Staff has already been rated please edit the existing rating.");
+                ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
+                ViewData["StaffID"] = new SelectList(_context.Subjects, "Staff", "FullName");
+                ModelState.AddModelError("Custom", "Staff has already been asigned to the same department");
                 return Page();
             }
             else
             {
-                _context.Rating.Add(Rating);
+                _context.DepartmentStaff.Add(DepartmentStaff);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToPage("./Index");
 
+            return RedirectToPage("./Index");
         }
     }
 }

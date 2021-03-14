@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.RoleS
+namespace AvcolStaff.Pages.DepartmentSubjectsS
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace AvcolStaff.Pages.RoleS
             _context = context;
         }
 
-        public Roles Roles { get; set; }
+        public DepartmentSubjects DepartmentSubjects { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,11 @@ namespace AvcolStaff.Pages.RoleS
                 return NotFound();
             }
 
-            Roles = await _context.Roles.FirstOrDefaultAsync(m => m.StaffID == id);
+            DepartmentSubjects = await _context.DepartmentSubjects
+                .Include(d => d.Departments)
+                .Include(d => d.Subjects).FirstOrDefaultAsync(m => m.DepartmentSubjectsID == id);
 
-            if (Roles == null)
+            if (DepartmentSubjects == null)
             {
                 return NotFound();
             }

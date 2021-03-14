@@ -16,9 +16,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Departments[0].DepartmentName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Departments[0].Staff)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -27,9 +24,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DepartmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staff.FullName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.DepartmentsID">Edit</a> |

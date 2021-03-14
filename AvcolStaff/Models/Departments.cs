@@ -10,10 +10,8 @@ namespace AvcolStaff.Models
     {
         public int DepartmentsID { get; set; }
         [Display(Name = "Department Name")]
-        //[Required]
-        public string DepartmentName { get; set; }//length less than 35
-        [Display (Name= "Staff")]
-        public int? StaffID { get; set; }
-        public Staff Staff { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "Invalid Department Name")]
+        public string DepartmentName { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.StandardsS
+namespace AvcolStaff.Pages.DepartmentStaffS
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace AvcolStaff.Pages.StandardsS
         }
 
         [BindProperty]
-        public Standards Standards { get; set; }
+        public DepartmentStaff DepartmentStaff { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,10 +29,11 @@ namespace AvcolStaff.Pages.StandardsS
                 return NotFound();
             }
 
-            Standards = await _context.Standards
-                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.SubjectsID == id);
+            DepartmentStaff = await _context.DepartmentStaff
+                .Include(d => d.Departments)
+                .Include(d => d.Staff).FirstOrDefaultAsync(m => m.DepartmentStaffID == id);
 
-            if (Standards == null)
+            if (DepartmentStaff == null)
             {
                 return NotFound();
             }
@@ -46,11 +47,11 @@ namespace AvcolStaff.Pages.StandardsS
                 return NotFound();
             }
 
-            Standards = await _context.Standards.FindAsync(id);
+            DepartmentStaff = await _context.DepartmentStaff.FindAsync(id);
 
-            if (Standards != null)
+            if (DepartmentStaff != null)
             {
-                _context.Standards.Remove(Standards);
+                _context.DepartmentStaff.Remove(DepartmentStaff);
                 await _context.SaveChangesAsync();
             }
 

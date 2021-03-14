@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using AvcolStaff.Utilities;
+//using AvcolStaff.Utilities;
 using Microsoft.AspNetCore.Mvc;
-
+using AvcolStaff.Pages.StaffS;
 namespace AvcolStaff.Models
 {
     public class PersonalInformation

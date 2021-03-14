@@ -28,8 +28,7 @@ namespace AvcolStaff.Pages.DepartmentS
                 return NotFound();
             }
 
-            Departments = await _context.Departments
-                .Include(d => d.Staff).FirstOrDefaultAsync(m => m.DepartmentsID == id);
+            Departments = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentsID == id);
 
             if (Departments == null)
             {

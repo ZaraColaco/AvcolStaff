@@ -4,21 +4,8 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<script type="text/javascript">
-    function onNameChange()//when a name is entered
-    {
-        var firstName = $('#Staff_FirstName').val();// stores the value of first name in a variable
-        var lastName = $('#Staff_LastName').val();//stores the vlaue of the last name in a variable
-
-        if (firstName !== "" && lastName !== "")//not nulls
-        {
-            $('#Staff_TeacherCode').val(firstName.substring(0, 1).toUpperCase() + lastName.substring(0, 2).toUpperCase());
-            //sets the value of the teacher code in the staff class. Takes the start of the first name string up to the first character and adds it to the first 2 charcters of the last name and then makes them upper case
-        }
-
-    }
+<script src="~/js/TeacherCode.js">
 </script>
-
 <h1>Edit</h1>
 
 <h4>Staff</h4>
@@ -30,12 +17,12 @@
             <input type="hidden" asp-for="Staff.StaffID" />
             <div class="form-group">
                 <label asp-for="Staff.FirstName" class="control-label"></label>
-                <input asp-for="Staff.FirstName" class="form-control"onchange="onNameChange()"/>
+                <input asp-for="Staff.FirstName" class="form-control" onchange="onNameChange()" />
                 <span asp-validation-for="Staff.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Staff.LastName" class="control-label"></label>
-                <input asp-for="Staff.LastName" class="form-control"onchange="onNameChange()" />
+                <input asp-for="Staff.LastName" class="form-control" onchange="onNameChange()" />
                 <span asp-validation-for="Staff.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,6 +38,7 @@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+            @Html.ValidationSummary(false)
         </form>
     </div>
 </div>

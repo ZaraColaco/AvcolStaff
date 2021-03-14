@@ -2,29 +2,30 @@
 @model AvcolStaff.Pages.SessionS.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Sessions";
 }
-    <script type="text/javascript">
-        function onPeriodChange() {
-            var Period = $('#Sessions_Period').val();
-            if (Period == 1) {
-                $('#Sessions_Time').val("9:15-10:10");
-            }
-            else if (Period == 2) {
-                $('#Sessions_Time').val("10:15-11:10");
-            }
-            else if (Period == 3) {
-                $('#Sessions_Time').val("11:35 - 12:30");
-            }
-            else if (Period == 4) {
-                $('#Sessions_Time').val("1:20 - 2:15");
-            }
-            else if (Period == 5) {
-                $('#Sessions_Time').val("2:20-3:15");
-            }
+<script type="text/javascript">
+    function onPeriodChange() {
+        var Period = $('#Sessions_Period').val();
+        if (Period == 1) {
+            $('#Sessions_Time').val("9:15-10:10");
         }
-    </script>
-<h1>Create</h1>
+        else if (Period == 2) {
+            $('#Sessions_Time').val("10:15-11:10");
+        }
+        else if (Period == 3) {
+            $('#Sessions_Time').val("11:35 - 12:30");
+        }
+        else if (Period == 4) {
+            $('#Sessions_Time').val("1:20 - 2:15");
+        }
+        else if (Period == 5) {
+            $('#Sessions_Time').val("2:20-3:15");
+        }
+    }
+</script>
+
+<h1>Sessions</h1>
 
 <h4>Sessions</h4>
 <hr />
@@ -34,7 +35,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Sessions.StaffID" class="control-label"></label>
-                <select asp-for="Sessions.StaffID" class ="form-control" asp-items="ViewBag.StaffID"></select>
+                <select asp-for="Sessions.StaffID" class="form-control" asp-items="ViewBag.StaffID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sessions.SubjectsID" class="control-label"></label>
+                <select asp-for="Sessions.SubjectsID" class="form-control" asp-items="ViewBag.SubjectsID"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Sessions.RoomNumber" class="control-label"></label>
@@ -42,12 +47,8 @@
                 <span asp-validation-for="Sessions.RoomNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Sessions.SubjectsID" class="control-label"></label>
-                <select asp-for="Sessions.SubjectsID" class ="form-control" asp-items="ViewBag.SubjectsID"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="Sessions.Period" class="control-label"></label>
-                <input asp-for="Sessions.Period" class="form-control"onchange="onPeriodChange()" />
+                <input asp-for="Sessions.Period" class="form-control"onchange="onPeriodChange()"  />
                 <span asp-validation-for="Sessions.Period" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -64,7 +65,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Sessions.Time" class="control-label"></label>
-                <input asp-for="Sessions.Time" readonly class="form-control" />
+                <input asp-for="Sessions.Time" class="form-control" />
                 <span asp-validation-for="Sessions.Time" class="text-danger"></span>
             </div>
             <div class="form-group">

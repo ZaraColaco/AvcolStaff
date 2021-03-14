@@ -23,8 +23,7 @@ namespace AvcolStaff.Pages.DepartmentS
 
         public async Task OnGetAsync()
         {
-            Departments = await _context.Departments
-                .Include(d => d.Staff).ToListAsync();
+            Departments = await _context.Departments.ToListAsync();
         }
     }
 }

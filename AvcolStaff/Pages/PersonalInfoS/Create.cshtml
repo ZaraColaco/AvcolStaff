@@ -1,18 +1,10 @@
 ﻿@page
 @model AvcolStaff.Pages.PersonalInfoS.CreateModel
-
+@using AvcolStaff.Pages.StaffS
 @{
     ViewData["Title"] = "Create";
 }
-<script type="text/javascript">
-    function onNameChange() {
-        var TeacherCode = $('#Staff_TeacherCode').val();
-
-        $('#PersonalInformation_EmailAddress').val(TeacherCode + "@@avcol.school.nz");
-    }
-</script>
 <h1>Create</h1>
-
 <h4>PersonalInformation</h4>
 <hr />
 <div class="row">
@@ -25,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PersonalInformation.DateOfBirth" class="control-label"></label>
-                <input asp-for="PersonalInformation.DateOfBirth" class="form-control"onchange="onDateChange()" />
+                <input asp-for="PersonalInformation.DateOfBirth" class="form-control" />
                 <span asp-validation-for="PersonalInformation.DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -73,12 +65,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="PersonalInformation.EmailAddress" class="control-label"></label>
-                <input asp-for="PersonalInformation.EmailAddress" class="form-control" />
+                <input asp-for="PersonalInformation.EmailAddress" class="form-control"/>
                 <span asp-validation-for="PersonalInformation.EmailAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            @Html.ValidationSummary(false)
         </form>
     </div>
 </div>

@@ -41,13 +41,18 @@ namespace AvcolStaff.Pages.StaffS
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
+        private DateTime CheckDate = new DateTime(1985, 01, 01);
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
+            if (Staff.HireDate > DateTime.Now || Staff.HireDate < CheckDate)
+            {
+                ModelState.AddModelError("Custom", "Invalid Hire date");
+                return Page();
+            }
             _context.Attach(Staff).State = EntityState.Modified;
 
             try

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.StandardsS
+namespace AvcolStaff.Pages.DepartmentStaffS
 {
     public class IndexModel : PageModel
     {
@@ -19,12 +19,13 @@ namespace AvcolStaff.Pages.StandardsS
             _context = context;
         }
 
-        public IList<Standards> Standards { get;set; }
+        public IList<DepartmentStaff> DepartmentStaff { get;set; }
 
         public async Task OnGetAsync()
         {
-            Standards = await _context.Standards
-                .Include(s => s.Subjects).ToListAsync();
+            DepartmentStaff = await _context.DepartmentStaff
+                .Include(d => d.Departments)
+                .Include(d => d.Staff).ToListAsync();
         }
     }
 }

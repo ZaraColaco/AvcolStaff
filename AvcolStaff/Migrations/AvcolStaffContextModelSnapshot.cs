@@ -19,6 +19,55 @@ namespace AvcolStaff.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("AvcolStaff.Models.DepartmentStaff", b =>
+                {
+                    b.Property<int>("DepartmentStaffID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DepartmentsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StaffID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubjectsID")
+                        .HasColumnType("int");
+
+                    b.HasKey("DepartmentStaffID");
+
+                    b.HasIndex("DepartmentsID");
+
+                    b.HasIndex("StaffID");
+
+                    b.HasIndex("SubjectsID");
+
+                    b.ToTable("DepartmentStaff");
+                });
+
+            modelBuilder.Entity("AvcolStaff.Models.DepartmentSubjects", b =>
+                {
+                    b.Property<int>("DepartmentSubjectsID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DepartmentsID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubjectsID")
+                        .HasColumnType("int");
+
+                    b.HasKey("DepartmentSubjectsID");
+
+                    b.HasIndex("DepartmentsID");
+
+                    b.HasIndex("SubjectsID");
+
+                    b.ToTable("DepartmentSubjects");
+                });
+
             modelBuilder.Entity("AvcolStaff.Models.Departments", b =>
                 {
                     b.Property<int>("DepartmentsID")
@@ -27,7 +76,9 @@ namespace AvcolStaff.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DepartmentName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(35)")
+                        .HasMaxLength(35);
 
                     b.Property<int?>("StaffID")
                         .HasColumnType("int");
@@ -48,15 +99,6 @@ namespace AvcolStaff.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BankAccount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ethnicity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(56)")
-                        .HasMaxLength(56);
-
                     b.Property<string>("CitizenStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -66,7 +108,8 @@ namespace AvcolStaff.Migrations
 
                     b.Property<string>("EcRelaitonship")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(56)")
+                        .HasMaxLength(56);
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
@@ -74,15 +117,18 @@ namespace AvcolStaff.Migrations
 
                     b.Property<string>("EmergencyContact")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
-                    b.Property<string>("IrdNumber")
+                    b.Property<string>("Ethnicity")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(56)")
+                        .HasMaxLength(56);
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.HasKey("StaffID");
 
@@ -122,56 +168,28 @@ namespace AvcolStaff.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("AvcolStaff.Models.Salary", b =>
-                {
-                    b.Property<int>("SalaryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("ActualSalary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("EndRange")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("MoeNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SalaryGradeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StaffID")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("StartRange")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("SalaryID");
-
-                    b.ToTable("Salary");
-                });
-
             modelBuilder.Entity("AvcolStaff.Models.Sessions", b =>
                 {
                     b.Property<int>("StaffID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Day")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Day")
+                        .HasColumnType("int");
 
                     b.Property<int>("Period")
                         .HasColumnType("int");
 
                     b.Property<string>("RoomNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(3)")
+                        .HasMaxLength(3);
 
                     b.Property<int>("SubjectsID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Time")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StaffID");
 
@@ -202,36 +220,11 @@ namespace AvcolStaff.Migrations
                         .HasMaxLength(35);
 
                     b.Property<string>("TeacherCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(3)")
-                        .HasMaxLength(3);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StaffID");
 
                     b.ToTable("Staff");
-                });
-
-            modelBuilder.Entity("AvcolStaff.Models.Standards", b =>
-                {
-                    b.Property<int>("SubjectsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Credits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StaffID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StandardCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StandardName")
-                        .HasColumnType("nvarchar(60)")
-                        .HasMaxLength(60);
-
-                    b.HasKey("SubjectsID");
-
-                    b.ToTable("Standards");
                 });
 
             modelBuilder.Entity("AvcolStaff.Models.Subjects", b =>
@@ -241,25 +234,51 @@ namespace AvcolStaff.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DepartmentsID")
-                        .HasColumnType("int");
-
                     b.Property<string>("SubjectName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TotalCredits")
-                        .HasColumnType("int");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(5)")
+                        .HasMaxLength(5);
 
                     b.HasKey("SubjectsID");
-
-                    b.HasIndex("DepartmentsID");
 
                     b.ToTable("Subjects");
                 });
 
+            modelBuilder.Entity("AvcolStaff.Models.DepartmentStaff", b =>
+                {
+                    b.HasOne("AvcolStaff.Models.Departments", "Departments")
+                        .WithMany()
+                        .HasForeignKey("DepartmentsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AvcolStaff.Models.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AvcolStaff.Models.Subjects", "Subjects")
+                        .WithMany()
+                        .HasForeignKey("SubjectsID");
+                });
+
+            modelBuilder.Entity("AvcolStaff.Models.DepartmentSubjects", b =>
+                {
+                    b.HasOne("AvcolStaff.Models.Departments", "Departments")
+                        .WithMany()
+                        .HasForeignKey("DepartmentsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AvcolStaff.Models.Subjects", "Subjects")
+                        .WithMany()
+                        .HasForeignKey("SubjectsID");
+                });
+
             modelBuilder.Entity("AvcolStaff.Models.Departments", b =>
                 {
-                    b.HasOne("AvcolStaff.Models.Staff", "Staff")
+                    b.HasOne("AvcolStaff.Models.Staff", null)
                         .WithMany("Departments")
                         .HasForeignKey("StaffID");
                 });
@@ -297,27 +316,9 @@ namespace AvcolStaff.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AvcolStaff.Models.Subjects", "subjects")
+                    b.HasOne("AvcolStaff.Models.Subjects", "Subjects")
                         .WithOne("Sessions")
                         .HasForeignKey("AvcolStaff.Models.Sessions", "SubjectsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AvcolStaff.Models.Standards", b =>
-                {
-                    b.HasOne("AvcolStaff.Models.Subjects", "Subjects")
-                        .WithOne("Standards")
-                        .HasForeignKey("AvcolStaff.Models.Standards", "SubjectsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AvcolStaff.Models.Subjects", b =>
-                {
-                    b.HasOne("AvcolStaff.Models.Departments", "Departments")
-                        .WithMany()
-                        .HasForeignKey("DepartmentsID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

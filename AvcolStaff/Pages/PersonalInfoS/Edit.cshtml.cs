@@ -41,21 +41,31 @@ namespace AvcolStaff.Pages.PersonalInfoS
             {
                 return NotFound();
             }
-           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
+            ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
+        private DateTime EarlyDate = new DateTime(1950, 01, 01);
+        private DateTime LateDate = new DateTime(1999, 01, 01);
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
+            if (PersonalInformation.DateOfBirth < EarlyDate || PersonalInformation.DateOfBirth > LateDate)
+            {
+                ModelState.AddModelError("Custom", "Invalid Date of Birth");
+                return Page();
+            }
+            if (!PersonalInformation.EmailAddress.EndsWith("@avcol.school.nz"))
+            {
+                ModelState.AddModelError("Custom", "Email Domain is incorrect please enter an email address with the correct avcol domain");
+                return Page();
+            }
             _context.Attach(PersonalInformation).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -66,6 +76,7 @@ namespace AvcolStaff.Pages.PersonalInfoS
                 {
                     return NotFound();
                 }
+
                 else
                 {
                     throw;

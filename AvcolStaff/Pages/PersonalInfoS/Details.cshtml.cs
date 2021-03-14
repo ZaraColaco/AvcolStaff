@@ -13,7 +13,7 @@ namespace AvcolStaff.Pages.PersonalInfoS
     public class DetailsModel : PageModel
     {
         private readonly AvcolStaff.Data.AvcolStaffContext _context;
-
+        public string CitizenS;
         public DetailsModel(AvcolStaff.Data.AvcolStaffContext context)
         {
             _context = context;
@@ -23,6 +23,14 @@ namespace AvcolStaff.Pages.PersonalInfoS
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (PersonalInformation.CitizenStatus == "1")
+            {
+                CitizenS = "NZ Citizen";
+            }
+            else
+            {
+                CitizenS = "Other";
+            }
             if (id == null)
             {
                 return NotFound();

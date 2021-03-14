@@ -30,14 +30,12 @@ namespace AvcolStaff.Pages.DepartmentS
                 return NotFound();
             }
 
-            Departments = await _context.Departments
-                .Include(d => d.Staff).FirstOrDefaultAsync(m => m.DepartmentsID == id);
+            Departments = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentsID == id);
 
             if (Departments == null)
             {
                 return NotFound();
             }
-           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
             return Page();
         }
 
@@ -48,6 +46,18 @@ namespace AvcolStaff.Pages.DepartmentS
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+            Departments department = (from t1 in _context.Departments where t1.DepartmentName == Departments.DepartmentName select t1).FirstOrDefault();
+            _context.Departments.Add(Departments);
+            if (department != null)
+            {
+                ModelState.AddModelError("Custom", "Department already exists");
+                return Page();
+            }
+            else
+            {
+                _context.Departments.Add(Departments);
+                await _context.SaveChangesAsync();
             }
 
             _context.Attach(Departments).State = EntityState.Modified;

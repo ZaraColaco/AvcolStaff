@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-namespace AvcolStaff.Pages.SessionS
+namespace AvcolStaff.Pages.DepartmentSubjectsS
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace AvcolStaff.Pages.SessionS
         }
 
         [BindProperty]
-        public Sessions Sessions { get; set; }
+        public DepartmentSubjects DepartmentSubjects { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,15 +30,15 @@ namespace AvcolStaff.Pages.SessionS
                 return NotFound();
             }
 
-            Sessions = await _context.Sessions
-                .Include(s => s.Staff)
-                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.StaffID == id);
+            DepartmentSubjects = await _context.DepartmentSubjects
+                .Include(d => d.Departments)
+                .Include(d => d.Subjects).FirstOrDefaultAsync(m => m.DepartmentSubjectsID == id);
 
-            if (Sessions == null)
+            if (DepartmentSubjects == null)
             {
                 return NotFound();
             }
-           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
+           ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
            ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
             return Page();
         }
@@ -51,8 +51,23 @@ namespace AvcolStaff.Pages.SessionS
             {
                 return Page();
             }
+            DepartmentSubjects sub = (from t1 in _context.DepartmentSubjects
+                                      where t1.SubjectsID == DepartmentSubjects.SubjectsID
+                                      select t1).FirstOrDefault();
+            if (sub != null)
+            {
+                ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
+                ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
+                ModelState.AddModelError("Custom", "Subject has already been asigned a department");
+                return Page();
+            }
+            else
+            {
+                _context.DepartmentSubjects.Add(DepartmentSubjects);
+                await _context.SaveChangesAsync();
+            }
 
-            _context.Attach(Sessions).State = EntityState.Modified;
+            _context.Attach(DepartmentSubjects).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +75,7 @@ namespace AvcolStaff.Pages.SessionS
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SessionsExists(Sessions.StaffID))
+                if (!DepartmentSubjectsExists(DepartmentSubjects.DepartmentSubjectsID))
                 {
                     return NotFound();
                 }
@@ -73,9 +88,9 @@ namespace AvcolStaff.Pages.SessionS
             return RedirectToPage("./Index");
         }
 
-        private bool SessionsExists(int id)
+        private bool DepartmentSubjectsExists(int id)
         {
-            return _context.Sessions.Any(e => e.StaffID == id);
+            return _context.DepartmentSubjects.Any(e => e.DepartmentSubjectsID == id);
         }
     }
 }

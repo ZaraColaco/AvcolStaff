@@ -16,9 +16,6 @@ namespace AvcolStaff.Data
 
         public DbSet<AvcolStaff.Models.Staff> Staff { get; set; }
 
-
-        public DbSet<AvcolStaff.Models.Standards> Standards { get; set; }
-
         public DbSet<AvcolStaff.Models.Subjects> Subjects { get; set; }
 
         public DbSet<AvcolStaff.Models.Departments> Departments { get; set; }
@@ -29,6 +26,10 @@ namespace AvcolStaff.Data
 
         public DbSet<AvcolStaff.Models.Sessions> Sessions { get; set; }
 
-        public DbSet<AvcolStaff.Models.Roles> Roles { get; set; }
+
+        public DbSet<AvcolStaff.Models.DepartmentStaff> DepartmentStaff { get; set; }
+
+        public DbSet<AvcolStaff.Models.DepartmentSubjects> DepartmentSubjects { get; set; }
+
     }
 }

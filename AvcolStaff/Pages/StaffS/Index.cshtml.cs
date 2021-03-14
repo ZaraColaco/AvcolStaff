@@ -23,13 +23,18 @@ namespace AvcolStaff.Pages.StaffS
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
         public IList<Staff> Staff { get; set; }
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_ascend" : "";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+            CurrentFilter = searchString;
             IQueryable<Staff> StaffIQ = from s in _context.Staff
                                              select s;
-
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                StaffIQ = StaffIQ.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "name_ascend":

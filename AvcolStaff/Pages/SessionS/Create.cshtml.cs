@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
+
 namespace AvcolStaff.Pages.SessionS
 {
     public class CreateModel : PageModel
@@ -21,7 +22,7 @@ namespace AvcolStaff.Pages.SessionS
 
         public IActionResult OnGet()
         {
-        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
         ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
             return Page();
         }
@@ -29,7 +30,10 @@ namespace AvcolStaff.Pages.SessionS
         [BindProperty]
         public Sessions Sessions { get; set; }
         [BindProperty]
-        public int Day { get; set; }
+        public DepartmentSubjects DepartmentSubjects{get; set;}
+        [BindProperty]
+        public DepartmentStaff DepartmentStaff{ get; set; }
+
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -38,11 +42,11 @@ namespace AvcolStaff.Pages.SessionS
             {
                 return Page();
             }
-
+   
             _context.Sessions.Add(Sessions);
-            await _context.SaveChangesAsync();
-
+                await _context.SaveChangesAsync();
+            
             return RedirectToPage("./Index");
         }
-    }
-}
+ }   }
+

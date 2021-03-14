@@ -8,24 +8,6 @@ namespace AvcolStaff.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Salary",
-                columns: table => new
-                {
-                    SalaryID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StaffID = table.Column<int>(nullable: false),
-                    SalaryGradeName = table.Column<string>(nullable: true),
-                    StartRange = table.Column<decimal>(nullable: false),
-                    EndRange = table.Column<decimal>(nullable: false),
-                    ActualSalary = table.Column<decimal>(nullable: false),
-                    MoeNumber = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Salary", x => x.SalaryID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Staff",
                 columns: table => new
                 {
@@ -33,7 +15,7 @@ namespace AvcolStaff.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 35, nullable: false),
                     LastName = table.Column<string>(maxLength: 35, nullable: false),
-                    TeacherCode = table.Column<string>(maxLength: 3, nullable: false),
+                    TeacherCode = table.Column<string>(nullable: true),
                     HireDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -42,12 +24,25 @@ namespace AvcolStaff.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Subjects",
+                columns: table => new
+                {
+                    SubjectsID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubjectName = table.Column<string>(maxLength: 5, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subjects", x => x.SubjectsID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
                 {
                     DepartmentsID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DepartmentName = table.Column<string>(nullable: true),
+                    DepartmentName = table.Column<string>(maxLength: 35, nullable: false),
                     StaffID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -67,15 +62,13 @@ namespace AvcolStaff.Migrations
                 {
                     StaffID = table.Column<int>(nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
-                    IrdNumber = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: false),
-                    PhoneNumber = table.Column<string>(nullable: false),
-                    EmergencyContact = table.Column<string>(nullable: false),
-                    EcRelaitonship = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(maxLength: 10, nullable: false),
+                    EmergencyContact = table.Column<string>(maxLength: 10, nullable: false),
+                    EcRelaitonship = table.Column<string>(maxLength: 56, nullable: false),
                     CitizenStatus = table.Column<string>(nullable: false),
                     Ethnicity = table.Column<string>(maxLength: 56, nullable: false),
-                    EmailAddress = table.Column<string>(nullable: false),
-                    BankAccount = table.Column<string>(nullable: false)
+                    EmailAddress = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,36 +120,15 @@ namespace AvcolStaff.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Subjects",
-                columns: table => new
-                {
-                    SubjectsID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectName = table.Column<string>(nullable: true),
-                    DepartmentsID = table.Column<int>(nullable: false),
-                    TotalCredits = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Subjects", x => x.SubjectsID);
-                    table.ForeignKey(
-                        name: "FK_Subjects_Departments_DepartmentsID",
-                        column: x => x.DepartmentsID,
-                        principalTable: "Departments",
-                        principalColumn: "DepartmentsID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sessions",
                 columns: table => new
                 {
                     StaffID = table.Column<int>(nullable: false),
-                    RoomNumber = table.Column<string>(nullable: true),
+                    RoomNumber = table.Column<string>(maxLength: 3, nullable: false),
                     SubjectsID = table.Column<int>(nullable: false),
                     Period = table.Column<int>(nullable: false),
-                    Day = table.Column<string>(nullable: true),
-                    Time = table.Column<DateTime>(nullable: false)
+                    Day = table.Column<int>(nullable: false),
+                    Time = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -176,30 +148,93 @@ namespace AvcolStaff.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Standards",
+                name: "DepartmentStaff",
                 columns: table => new
                 {
-                    SubjectsID = table.Column<int>(nullable: false),
-                    Credits = table.Column<int>(nullable: false),
-                    StandardName = table.Column<string>(maxLength: 60, nullable: true),
-                    StandardCode = table.Column<string>(nullable: true),
-                    StaffID = table.Column<string>(nullable: true)
+                    DepartmentStaffID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StaffID = table.Column<int>(nullable: false),
+                    DepartmentsID = table.Column<int>(nullable: false),
+                    SubjectsID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Standards", x => x.SubjectsID);
+                    table.PrimaryKey("PK_DepartmentStaff", x => x.DepartmentStaffID);
                     table.ForeignKey(
-                        name: "FK_Standards_Subjects_SubjectsID",
+                        name: "FK_DepartmentStaff_Departments_DepartmentsID",
+                        column: x => x.DepartmentsID,
+                        principalTable: "Departments",
+                        principalColumn: "DepartmentsID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DepartmentStaff_Staff_StaffID",
+                        column: x => x.StaffID,
+                        principalTable: "Staff",
+                        principalColumn: "StaffID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DepartmentStaff_Subjects_SubjectsID",
                         column: x => x.SubjectsID,
                         principalTable: "Subjects",
                         principalColumn: "SubjectsID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DepartmentSubjects",
+                columns: table => new
+                {
+                    DepartmentSubjectsID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DepartmentsID = table.Column<int>(nullable: false),
+                    SubjectsID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DepartmentSubjects", x => x.DepartmentSubjectsID);
+                    table.ForeignKey(
+                        name: "FK_DepartmentSubjects_Departments_DepartmentsID",
+                        column: x => x.DepartmentsID,
+                        principalTable: "Departments",
+                        principalColumn: "DepartmentsID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DepartmentSubjects_Subjects_SubjectsID",
+                        column: x => x.SubjectsID,
+                        principalTable: "Subjects",
+                        principalColumn: "SubjectsID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Departments_StaffID",
                 table: "Departments",
                 column: "StaffID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DepartmentStaff_DepartmentsID",
+                table: "DepartmentStaff",
+                column: "DepartmentsID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DepartmentStaff_StaffID",
+                table: "DepartmentStaff",
+                column: "StaffID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DepartmentStaff_SubjectsID",
+                table: "DepartmentStaff",
+                column: "SubjectsID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DepartmentSubjects_DepartmentsID",
+                table: "DepartmentSubjects",
+                column: "DepartmentsID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DepartmentSubjects_SubjectsID",
+                table: "DepartmentSubjects",
+                column: "SubjectsID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Roles_StaffID1",
@@ -211,15 +246,16 @@ namespace AvcolStaff.Migrations
                 table: "Sessions",
                 column: "SubjectsID",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Subjects_DepartmentsID",
-                table: "Subjects",
-                column: "DepartmentsID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DepartmentStaff");
+
+            migrationBuilder.DropTable(
+                name: "DepartmentSubjects");
+
             migrationBuilder.DropTable(
                 name: "PersonalInformation");
 
@@ -230,19 +266,13 @@ namespace AvcolStaff.Migrations
                 name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "Salary");
-
-            migrationBuilder.DropTable(
                 name: "Sessions");
 
             migrationBuilder.DropTable(
-                name: "Standards");
+                name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "Subjects");
-
-            migrationBuilder.DropTable(
-                name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "Staff");

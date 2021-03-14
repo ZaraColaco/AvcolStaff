@@ -1,0 +1,42 @@
+﻿@page
+@model AvcolStaff.Pages.DepartmentStaffS.IndexModel
+
+@{
+    ViewData["Title"] = "Department Staff";
+}
+
+    <h1>Department Staff</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentStaff[0].Staff)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentStaff[0].Departments)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.DepartmentStaff) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staff.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departments.DepartmentName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.DepartmentStaffID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.DepartmentStaffID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.DepartmentStaffID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

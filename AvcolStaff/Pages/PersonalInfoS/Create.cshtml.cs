@@ -40,17 +40,13 @@ namespace AvcolStaff.Pages.PersonalInfoS
         {
             if (!ModelState.IsValid)
             {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
                 return Page();
             }
             if (PersonalInformation.DateOfBirth < EarlyDate || PersonalInformation.DateOfBirth > LateDate)
             {
                 ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
                 ModelState.AddModelError("Custom", "Invalid Date of Birth");
-                return Page();
-            }
-            if (!ModelState.IsValid)
-            {
-                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
                 return Page();
             }
 

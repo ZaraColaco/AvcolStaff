@@ -22,7 +22,7 @@ namespace AvcolStaff.Pages.SessionS
 
         public IActionResult OnGet()
         {
-        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
+        ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
         ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
             return Page();
         }
@@ -42,11 +42,32 @@ namespace AvcolStaff.Pages.SessionS
             {
                 return Page();
             }
-   
+            int sessSub = Sessions.SubjectsID;
+            int sessStaff = Sessions.StaffID;
+            int deptSub = (from t1 in _context.DepartmentSubjects
+                     where t1.SubjectsID == sessSub// any identifier comparison can be done here
+                     select t1.DepartmentsID).FirstOrDefault();
+
+            var query = (from t2 in _context.DepartmentStaff
+                         where t2.StaffID == sessStaff
+                         && t2.DepartmentsID == deptSub
+                         select t2.DepartmentsID).FirstOrDefault();
+
+
+            if (query == 0)
+            {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ViewData["SubjectMasterID"] = new SelectList(_context.Subjects, "Subjects", "SubjectName");
+                ModelState.AddModelError("Custom", " The Department(s) of this Staff does not have the subject you selected ");
+                return Page();
+
+            }
             _context.Sessions.Add(Sessions);
-                await _context.SaveChangesAsync();
-            
+            await _context.SaveChangesAsync();
+
             return RedirectToPage("./Index");
         }
- }   }
+
+        }
+ }   
 

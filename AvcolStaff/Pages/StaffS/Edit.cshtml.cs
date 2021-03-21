@@ -48,6 +48,14 @@ namespace AvcolStaff.Pages.StaffS
             {
                 return Page();
             }
+            var staffName = (from t1 in _context.Staff
+                             where t1.FirstName == Staff.FirstName && t1.LastName == Staff.LastName
+                             select t1).FirstOrDefault();
+            if (staffName != null)
+            {
+                ModelState.AddModelError("Custom", " Staff already exists");
+                return Page();
+            }
             if (Staff.HireDate > DateTime.Now || Staff.HireDate < CheckDate)
             {
                 ModelState.AddModelError("Custom", "Invalid Hire date");

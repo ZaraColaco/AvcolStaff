@@ -20,21 +20,8 @@ namespace AvcolStaff.Pages.PersonalInfoS
         }
 
         public PersonalInformation PersonalInformation { get; set; }
-
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (PersonalInformation.CitizenStatus == "1")
-            {
-                CitizenS = "NZ Citizen";
-            }
-            else
-            {
-                CitizenS = "Other";
-            }
-            if (id == null)
-            {
-                return NotFound();
-            }
 
             PersonalInformation = await _context.PersonalInformation
                 .Include(p => p.Staff).FirstOrDefaultAsync(m => m.StaffID == id);

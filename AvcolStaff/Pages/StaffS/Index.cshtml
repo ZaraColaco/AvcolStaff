@@ -25,18 +25,16 @@
         <tr>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
-                    @Html.DisplayNameFor(model => model.Staff[0].FirstName)
-                </a>
-            </th>
-            <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
                     @Html.DisplayNameFor(model => model.Staff[0].LastName)
                 </a>
             </th>
             <th>
-                
-                    @Html.DisplayNameFor(model => model.Staff[0].TeacherCode)
-                
+                @Html.DisplayNameFor(model => model.Staff[0].FirstName)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.Staff[0].TeacherCode)
+
             </th>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
@@ -51,10 +49,10 @@
 {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TeacherCode)

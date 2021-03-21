@@ -30,13 +30,13 @@ namespace AvcolStaff.Data
                 new Staff{FirstName="Andrew",LastName="Bramston",TeacherCode="ABR",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="Santana ",LastName="Schmidt",TeacherCode="SSC",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="Erica",LastName="Norton",TeacherCode="ENO",HireDate=DateTime.Parse("2014-09-01")},
-                new Staff{FirstName="Selina",LastName="Tonkin",TeacherCode="STO",HireDate=DateTime.Parse("2067-09-01")},
+                new Staff{FirstName="Selina",LastName="Tonkin",TeacherCode="STO",HireDate=DateTime.Parse("2012-09-01")},
                 new Staff{FirstName="Sharon",LastName="Cope",TeacherCode="SCO",HireDate=DateTime.Parse("2014-09-09")},
                 new Staff{FirstName="Pushpa",LastName="Dayal",TeacherCode="PDA",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="Jin",LastName="Tai",TeacherCode="JTA",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="Hannah",LastName="Normington",TeacherCode="HNO",HireDate=DateTime.Parse("2013-09-06")},
                 new Staff{FirstName="Santana ",LastName="Schmidt",TeacherCode="SSC",HireDate=DateTime.Parse("2017-07-01")},//DUPLICATE TEACHER CODE!
-                new Staff{FirstName="James",LastName="Went",TeacherCode="JWE",HireDate=DateTime.Parse("2067-09-01")},
+                new Staff{FirstName="James",LastName="Went",TeacherCode="JWE",HireDate=DateTime.Parse("2015-09-01")},
                 new Staff{FirstName="Chris",LastName="Klaassen",TeacherCode="CKL",HireDate=DateTime.Parse("2019-12-01")},
                 new Staff{FirstName="Anthony",LastName="Munro",TeacherCode="AMU",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="James",LastName="Palmer",TeacherCode="JPA",HireDate=DateTime.Parse("2017-09-01")},
@@ -52,10 +52,10 @@ namespace AvcolStaff.Data
                 new Staff{FirstName="Philip",LastName="Irwin",TeacherCode="PIR",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="G",LastName="Hanna",TeacherCode="GHA",HireDate=DateTime.Parse("2013-09-06")},
                 new Staff{FirstName="Jenifer",LastName="Brown",TeacherCode="JBO",HireDate=DateTime.Parse("2017-07-01")},
-                new Staff{FirstName="Bevan",LastName="Jones",TeacherCode="BJO",HireDate=DateTime.Parse("2067-09-01")},
+                new Staff{FirstName="Bevan",LastName="Jones",TeacherCode="BJO",HireDate=DateTime.Parse("2021-01-01")},
                 new Staff{FirstName="Meg",LastName="Goldthrope",TeacherCode="MGO",HireDate=DateTime.Parse("2013-09-06")},
                 new Staff{FirstName="Neil",LastName="Bartlett",TeacherCode="NBA",HireDate=DateTime.Parse("2017-07-01")},
-                new Staff{FirstName="Shane",LastName="Laurence",TeacherCode="SLA",HireDate=DateTime.Parse("2067-09-01")}
+                new Staff{FirstName="Shane",LastName="Laurence",TeacherCode="SLA",HireDate=DateTime.Parse("2020-09-01")}
             };
 
             context.Staff.AddRange(staffs);

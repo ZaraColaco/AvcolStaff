@@ -17,9 +17,8 @@ namespace AvcolStaff.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        //[date]//need to validate the date 1985 is the latest
         [Display(Name = "Date of Birth")]
-        public DateTime DateOfBirth { get; set; }//has to be less than 80 years old
+        public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "This field cannot be left empty")]
         public string Address { get; set; }
@@ -47,9 +46,7 @@ namespace AvcolStaff.Models
         [Display(Name = "Email Address")]
         [Required(ErrorMessage = "This field cannot be left empty")]
         [EmailAddress]
-           //[Remote(action: "IsEmailInUse", controller: "Account")]
-        //[ValidEmailDomain(allowedDomain: "avcol.school.nz", ErrorMessage = "Please ensure this is a valid Avcol adress")]
-        public string EmailAddress { get; set; }//email format needs to contain one @ and end.com
+        public string EmailAddress { get; set; }
 
 
         public Staff Staff { get; set; }

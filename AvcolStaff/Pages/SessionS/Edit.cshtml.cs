@@ -51,32 +51,30 @@ namespace AvcolStaff.Pages.SessionS
             {
                 return Page();
             }
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
             int sessSub = Sessions.SubjectsID;
             int sessStaff = Sessions.StaffID;
             int deptSub = (from t1 in _context.DepartmentSubjects
                            where t1.SubjectsID == sessSub// any identifier comparison can be done here
                            select t1.DepartmentsID).FirstOrDefault();
 
-            var query = (from t2 in _context.DepartmentStaff
+            var query = 0;
+            if (deptSub > 0)
+            {
+                query = (from t2 in _context.DepartmentStaff
                          where t2.StaffID == sessStaff
                          && t2.DepartmentsID == deptSub
                          select t2.DepartmentsID).FirstOrDefault();
-
-
-            if (query == 0)
+            }
+            if (query == 0 || deptSub == 0)
             {
                 ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
-                ViewData["SubjectMasterID"] = new SelectList(_context.Subjects, "Subjects", "SubjectName");
-                ModelState.AddModelError("Custom", " The Department(s) of this Staff does not have the subject you selected ");
+                ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
+                ModelState.AddModelError("Custom", " This Staff has not been assigned to Department of the subject you selected ");
                 return Page();
 
             }
-        
-        _context.Attach(Sessions).State = EntityState.Modified;
+
+            _context.Attach(Sessions).State = EntityState.Modified;
 
             try
             {

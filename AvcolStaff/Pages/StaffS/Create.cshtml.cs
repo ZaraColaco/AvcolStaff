@@ -36,6 +36,35 @@ namespace AvcolStaff.Pages.StaffS
             {
                 return Page();
             }
+            var staffName = (from t1 in _context.Staff
+                             where t1.FirstName == Staff.FirstName && t1.LastName == Staff.LastName
+                             select t1).FirstOrDefault();
+            if (staffName != null)
+            {
+                ModelState.AddModelError("Custom", " Staff already exists");
+                return Page();
+            }
+            var LName = Staff.LastName;
+            var TCode = Staff.FirstName.Substring(0,1).ToUpper();
+            var TeacherCD = " ";
+            Staff staff = null;
+            for (int i =0; i< LName.Length-1;i++)
+            {
+                TeacherCD = TCode + LName.Substring(i, 2).ToUpper();
+                 staff = (from t1 in _context.Staff
+                                 where t1.TeacherCode == TeacherCD 
+                                 select t1).FirstOrDefault();
+                if (staff == null)
+                {
+                    break;
+                }
+
+            }
+           /* if (staff != null)
+            {
+                TeacherCD= Staff.FirstName
+            }*/
+            Staff.TeacherCode = TeacherCD;
             if (Staff.HireDate > DateTime.Now || Staff.HireDate < CheckDate)
             {
                 ModelState.AddModelError("Custom", "Invalid Hire date");

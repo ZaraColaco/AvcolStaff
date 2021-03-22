@@ -35,7 +35,6 @@ namespace AvcolStaff.Data
                 new Staff{FirstName="Pushpa",LastName="Dayal",TeacherCode="PDA",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="Jin",LastName="Tai",TeacherCode="JTA",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="Hannah",LastName="Normington",TeacherCode="HNO",HireDate=DateTime.Parse("2013-09-06")},
-                new Staff{FirstName="Santana ",LastName="Schmidt",TeacherCode="SSC",HireDate=DateTime.Parse("2017-07-01")},//DUPLICATE TEACHER CODE!
                 new Staff{FirstName="James",LastName="Went",TeacherCode="JWE",HireDate=DateTime.Parse("2015-09-01")},
                 new Staff{FirstName="Chris",LastName="Klaassen",TeacherCode="CKL",HireDate=DateTime.Parse("2019-12-01")},
                 new Staff{FirstName="Anthony",LastName="Munro",TeacherCode="AMU",HireDate=DateTime.Parse("2017-09-01")},
@@ -43,7 +42,6 @@ namespace AvcolStaff.Data
                 new Staff{FirstName="Jean",LastName="Mansill",TeacherCode="JMA",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="Grant",LastName="Burden",TeacherCode="GBU",HireDate=DateTime.Parse("2017-10-01")},
                 new Staff{FirstName="Elizabeth",LastName="Atkinson",TeacherCode="EAT",HireDate=DateTime.Parse("2017-09-01")},
-                new Staff{FirstName="Charlotte",LastName="Houghton",TeacherCode="CHO",HireDate=DateTime.Parse("2017-09-01")},//Duplicate Record
                 new Staff{FirstName="Ngarama",LastName="Howell",TeacherCode="NHO",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="Zameer",LastName="Mazid",TeacherCode="ZMA",HireDate=DateTime.Parse("2017-09-01")},
                 new Staff{FirstName="Julie",LastName="Garner",TeacherCode="JGA",HireDate=DateTime.Parse("2014-09-01")},

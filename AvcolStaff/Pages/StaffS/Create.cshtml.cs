@@ -45,25 +45,42 @@ namespace AvcolStaff.Pages.StaffS
                 return Page();
             }
             var LName = Staff.LastName;
-            var TCode = Staff.FirstName.Substring(0,1).ToUpper();
             var TeacherCD = " ";
             Staff staff = null;
-            for (int i =0; i< LName.Length-1;i++)
+            for (int f = 0; f < Staff.FirstName.Length; f++)
             {
-                TeacherCD = TCode + LName.Substring(i, 2).ToUpper();
-                 staff = (from t1 in _context.Staff
-                                 where t1.TeacherCode == TeacherCD 
-                                 select t1).FirstOrDefault();
+                var TCode = Staff.FirstName.Substring(f, 1).ToUpper();
+                for (int i = 0; i < LName.Length - 1; i++)
+                {
+                    TeacherCD = TCode + LName.Substring(i, 2).ToUpper();
+                    staff = (from t1 in _context.Staff
+                             where t1.TeacherCode == TeacherCD
+                             select t1).FirstOrDefault();
+                    if (staff == null)
+                    {
+                        break;
+                    }
+
+                }
                 if (staff == null)
                 {
                     break;
                 }
-
             }
-           /* if (staff != null)
+            if (staff == null)
             {
-                TeacherCD= Staff.FirstName
-            }*/
+                for (int i = 0; i < LName.Length - 1; i++)
+                {
+                    TeacherCD = "X" + LName.Substring(i, 2).ToUpper();
+                    staff = (from t1 in _context.Staff
+                             where t1.TeacherCode == TeacherCD
+                             select t1).FirstOrDefault();
+                    if (staff == null)
+                    {
+                        break;
+                    }
+                }
+            }
             Staff.TeacherCode = TeacherCD;
             if (Staff.HireDate > DateTime.Now || Staff.HireDate < CheckDate)
             {

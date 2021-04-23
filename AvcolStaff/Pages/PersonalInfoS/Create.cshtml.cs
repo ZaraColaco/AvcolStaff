@@ -38,6 +38,8 @@ namespace AvcolStaff.Pages.PersonalInfoS
         private DateTime LateDate = new DateTime(1999, 01, 01);
         public async Task<IActionResult> OnPostAsync()
         {
+            Staff staff = (from t1 in _context.Staff where t1.StaffID == PersonalInformation.StaffID select t1).FirstOrDefault();
+            PersonalInformation.EmailAddress = staff.TeacherCode + "@avcol.school.nz";
             if (!ModelState.IsValid)
             {
                 ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
@@ -49,20 +51,19 @@ namespace AvcolStaff.Pages.PersonalInfoS
                 ModelState.AddModelError("Custom", "Invalid Date of Birth");
                 return Page();
             }
-
-            if (!PersonalInformation.EmailAddress.EndsWith("@avcol.school.nz"))
-            {
-                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
-                ModelState.AddModelError("Custom", "Email Domain is incorrect please enter an email address with the correct avcol domain");
-                return Page();
-            }
+            //if (!PersonalInformation.EmailAddress.EndsWith("@avcol.school.nz"))
+            //{
+            //    ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
+            //    ModelState.AddModelError("Custom", "Email Domain is incorrect please enter an email address with the correct avcol domain");
+            //    return Page();
+            //}
             PersonalInformation pInfo = (from t1 in _context.PersonalInformation where t1.StaffID == PersonalInformation.StaffID select t1).FirstOrDefault();
             if (pInfo != null)
             {
                 ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
                 ModelState.AddModelError("Custom", "This Staff has already has a record of their personal information, please edit the existing one.");
                 return Page();
-            }
+            }                                                                 
             else
             {
                 _context.PersonalInformation.Add(PersonalInformation);

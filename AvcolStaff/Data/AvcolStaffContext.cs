@@ -31,5 +31,6 @@ namespace AvcolStaff.Data
 
         public DbSet<AvcolStaff.Models.DepartmentSubjects> DepartmentSubjects { get; set; }
 
+
     }
 }

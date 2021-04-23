@@ -44,7 +44,7 @@ namespace AvcolStaff.Models
         [Display(Name = "Ethnicity")]
         public string Ethnicity { get; set; }
         [Display(Name = "Email Address")]
-        [Required(ErrorMessage = "This field cannot be left empty")]
+        //[Required(ErrorMessage = "This field cannot be left empty")]
         [EmailAddress]
         public string EmailAddress { get; set; }
 

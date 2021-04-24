@@ -63,9 +63,26 @@ namespace AvcolStaff.Pages.SessionS
                 return Page();
              
             }
-            _context.Sessions.Add(Sessions);
-            await _context.SaveChangesAsync();
-
+           Sessions staff = (from t1 in _context.Sessions where t1.StaffID == Sessions.StaffID && t1.Day == Sessions.Day && t1.Period== Sessions.Period select t1).FirstOrDefault();
+            if (staff != null)
+            {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
+                ModelState.AddModelError("Custom", "Staff is booked for another class at this time. Please choose another staff or try changing the time");
+                return Page();
+            }
+            Sessions room = (from t1 in _context.Sessions where t1.RoomNumber == Sessions.RoomNumber && t1.Day == Sessions.Day && t1.Period == Sessions.Period select t1).FirstOrDefault();
+            if (room != null)
+            {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
+                ModelState.AddModelError("Custom", "This room is occupied at this time. Please choose another room");
+                return Page();
+            }
+            
+                _context.Sessions.Add(Sessions);
+                await _context.SaveChangesAsync();
+  
             return RedirectToPage("./Index");
         }
 

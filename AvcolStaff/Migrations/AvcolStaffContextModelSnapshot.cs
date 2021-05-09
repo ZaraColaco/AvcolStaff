@@ -32,16 +32,11 @@ namespace AvcolStaff.Migrations
                     b.Property<int>("StaffID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubjectsID")
-                        .HasColumnType("int");
-
                     b.HasKey("DepartmentStaffID");
 
                     b.HasIndex("DepartmentsID");
 
                     b.HasIndex("StaffID");
-
-                    b.HasIndex("SubjectsID");
 
                     b.ToTable("DepartmentStaff");
                 });
@@ -112,7 +107,6 @@ namespace AvcolStaff.Migrations
                         .HasMaxLength(56);
 
                     b.Property<string>("EmailAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmergencyContact")
@@ -148,30 +142,12 @@ namespace AvcolStaff.Migrations
                     b.ToTable("Rating");
                 });
 
-            modelBuilder.Entity("AvcolStaff.Models.Roles", b =>
+            modelBuilder.Entity("AvcolStaff.Models.Sessions", b =>
                 {
-                    b.Property<int>("StaffID")
+                    b.Property<int>("SessionsID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StaffID1")
-                        .HasColumnType("int");
-
-                    b.HasKey("StaffID");
-
-                    b.HasIndex("StaffID1");
-
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("AvcolStaff.Models.Sessions", b =>
-                {
-                    b.Property<int>("StaffID")
-                        .HasColumnType("int");
 
                     b.Property<int>("Day")
                         .HasColumnType("int");
@@ -184,6 +160,9 @@ namespace AvcolStaff.Migrations
                         .HasColumnType("nvarchar(3)")
                         .HasMaxLength(3);
 
+                    b.Property<int>("StaffID")
+                        .HasColumnType("int");
+
                     b.Property<int>("SubjectsID")
                         .HasColumnType("int");
 
@@ -191,7 +170,10 @@ namespace AvcolStaff.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("StaffID");
+                    b.HasKey("SessionsID");
+
+                    b.HasIndex("StaffID")
+                        .IsUnique();
 
                     b.HasIndex("SubjectsID")
                         .IsUnique();
@@ -257,10 +239,6 @@ namespace AvcolStaff.Migrations
                         .HasForeignKey("StaffID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("AvcolStaff.Models.Subjects", "Subjects")
-                        .WithMany()
-                        .HasForeignKey("SubjectsID");
                 });
 
             modelBuilder.Entity("AvcolStaff.Models.DepartmentSubjects", b =>
@@ -299,13 +277,6 @@ namespace AvcolStaff.Migrations
                         .HasForeignKey("AvcolStaff.Models.Rating", "StaffID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AvcolStaff.Models.Roles", b =>
-                {
-                    b.HasOne("AvcolStaff.Models.Staff", "Staff")
-                        .WithMany()
-                        .HasForeignKey("StaffID1");
                 });
 
             modelBuilder.Entity("AvcolStaff.Models.Sessions", b =>

@@ -32,13 +32,13 @@ namespace AvcolStaff.Pages.SessionS
 
             Sessions = await _context.Sessions
                 .Include(s => s.Staff)
-                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.StaffID == id);
+                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.SessionsID == id);
 
             if (Sessions == null)
             {
                 return NotFound();
             }
-           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
+           ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
            ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
             return Page();
         }
@@ -47,6 +47,7 @@ namespace AvcolStaff.Pages.SessionS
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            var sessId = Sessions.SessionsID;
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -72,6 +73,27 @@ namespace AvcolStaff.Pages.SessionS
                 ModelState.AddModelError("Custom", " This Staff has not been assigned to Department of the subject you selected ");
                 return Page();
 
+            }
+            Sessions teacher = (from t1 in _context.Sessions where t1.SessionsID != Sessions.SessionsID && t1.StaffID == Sessions.StaffID && t1.Day == Sessions.Day && t1.Period == Sessions.Period select t1).FirstOrDefault();
+            if (teacher != null)
+            {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
+                ModelState.AddModelError("Custom", "Staff is booked for another class at this time. Please choose another staff or try changing the time");
+                return Page();
+            }
+            Sessions room = (from t1 in _context.Sessions where t1.SessionsID != Sessions.SessionsID && t1.RoomNumber == Sessions.RoomNumber && t1.Day == Sessions.Day && t1.Period == Sessions.Period select t1).FirstOrDefault();
+            if (room != null)
+            {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
+                ModelState.AddModelError("Custom", "This room is occupied at this time. Please choose another room");
+                return Page();
+            }
+            else
+            {
+                _context.Sessions.Add(Sessions);
+                await _context.SaveChangesAsync();
             }
 
             _context.Attach(Sessions).State = EntityState.Modified;
@@ -101,3 +123,4 @@ namespace AvcolStaff.Pages.SessionS
         }
     }
 }
+

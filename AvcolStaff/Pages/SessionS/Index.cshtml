@@ -2,10 +2,10 @@
 @model AvcolStaff.Pages.SessionS.IndexModel
 
 @{
-    ViewData["Title"] = "Sessions";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Sessions</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -13,10 +13,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Sessions[0].Staff)
-            </th>
-
             <th>
                 @Html.DisplayNameFor(model => model.Sessions[0].RoomNumber)
             </th>
@@ -32,16 +28,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Sessions[0].Subjects)
             </th>
-
+            <th>
+                @Html.DisplayNameFor(model => model.Sessions[0].Staff)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Sessions) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staff.FullName)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RoomNumber)
             </td>
@@ -58,9 +53,12 @@
                 @Html.DisplayFor(modelItem => item.Subjects.SubjectName)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.StaffID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.StaffID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.StaffID">Delete</a>
+                @Html.DisplayFor(modelItem => item.Staff.FullName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SessionsID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SessionsID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SessionsID">Delete</a>
             </td>
         </tr>
 }

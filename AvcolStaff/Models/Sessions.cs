@@ -8,7 +8,7 @@ namespace AvcolStaff.Models
 
     public class Sessions
     {
-        [Key]
+        public int SessionsID { get; set; }
         [Required]
         [Display(Name = "Staff Name")]
         public int StaffID { get; set; }

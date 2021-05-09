@@ -68,7 +68,7 @@ namespace AvcolStaff.Migrations
                     EcRelaitonship = table.Column<string>(maxLength: 56, nullable: false),
                     CitizenStatus = table.Column<string>(nullable: false),
                     Ethnicity = table.Column<string>(maxLength: 56, nullable: false),
-                    EmailAddress = table.Column<string>(nullable: false)
+                    EmailAddress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -100,39 +100,21 @@ namespace AvcolStaff.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    StaffID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Role = table.Column<string>(nullable: true),
-                    StaffID1 = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.StaffID);
-                    table.ForeignKey(
-                        name: "FK_Roles_Staff_StaffID1",
-                        column: x => x.StaffID1,
-                        principalTable: "Staff",
-                        principalColumn: "StaffID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sessions",
                 columns: table => new
                 {
+                    SessionsID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     StaffID = table.Column<int>(nullable: false),
-                    RoomNumber = table.Column<string>(maxLength: 3, nullable: false),
                     SubjectsID = table.Column<int>(nullable: false),
+                    RoomNumber = table.Column<string>(maxLength: 3, nullable: false),
                     Period = table.Column<int>(nullable: false),
                     Day = table.Column<int>(nullable: false),
                     Time = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sessions", x => x.StaffID);
+                    table.PrimaryKey("PK_Sessions", x => x.SessionsID);
                     table.ForeignKey(
                         name: "FK_Sessions_Staff_StaffID",
                         column: x => x.StaffID,
@@ -154,8 +136,7 @@ namespace AvcolStaff.Migrations
                     DepartmentStaffID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StaffID = table.Column<int>(nullable: false),
-                    DepartmentsID = table.Column<int>(nullable: false),
-                    SubjectsID = table.Column<int>(nullable: true)
+                    DepartmentsID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -172,12 +153,6 @@ namespace AvcolStaff.Migrations
                         principalTable: "Staff",
                         principalColumn: "StaffID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DepartmentStaff_Subjects_SubjectsID",
-                        column: x => x.SubjectsID,
-                        principalTable: "Subjects",
-                        principalColumn: "SubjectsID",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -222,11 +197,6 @@ namespace AvcolStaff.Migrations
                 column: "StaffID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DepartmentStaff_SubjectsID",
-                table: "DepartmentStaff",
-                column: "SubjectsID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DepartmentSubjects_DepartmentsID",
                 table: "DepartmentSubjects",
                 column: "DepartmentsID");
@@ -237,9 +207,10 @@ namespace AvcolStaff.Migrations
                 column: "SubjectsID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Roles_StaffID1",
-                table: "Roles",
-                column: "StaffID1");
+                name: "IX_Sessions_StaffID",
+                table: "Sessions",
+                column: "StaffID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sessions_SubjectsID",
@@ -261,9 +232,6 @@ namespace AvcolStaff.Migrations
 
             migrationBuilder.DropTable(
                 name: "Rating");
-
-            migrationBuilder.DropTable(
-                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Sessions");

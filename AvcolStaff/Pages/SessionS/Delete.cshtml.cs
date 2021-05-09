@@ -31,7 +31,7 @@ namespace AvcolStaff.Pages.SessionS
 
             Sessions = await _context.Sessions
                 .Include(s => s.Staff)
-                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.StaffID == id);
+                .Include(s => s.Subjects).FirstOrDefaultAsync(m => m.SessionsID == id);
 
             if (Sessions == null)
             {

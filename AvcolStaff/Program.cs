@@ -31,7 +31,7 @@ namespace AvcolStaff
                 {
                     var context = services.GetRequiredService<AvcolStaffContext>();
                     context.Database.EnsureCreated();
-                    //DbInitializer.Initialize(context);//load data
+                    DbInitializer.Initialize(context);//load data
                 }
                 catch (Exception ex)
                 {

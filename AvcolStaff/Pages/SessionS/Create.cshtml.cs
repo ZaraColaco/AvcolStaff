@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AvcolStaff.Data;
 using AvcolStaff.Models;
 
-
 namespace AvcolStaff.Pages.SessionS
 {
     public class CreateModel : PageModel
@@ -29,10 +28,6 @@ namespace AvcolStaff.Pages.SessionS
 
         [BindProperty]
         public Sessions Sessions { get; set; }
-        [BindProperty]
-        public DepartmentSubjects DepartmentSubjects{get; set;}
-        [BindProperty]
-        public DepartmentStaff DepartmentStaff{ get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -42,29 +37,30 @@ namespace AvcolStaff.Pages.SessionS
             {
                 return Page();
             }
+
             int sessSub = Sessions.SubjectsID;
             int sessStaff = Sessions.StaffID;
             int deptSub = (from t1 in _context.DepartmentSubjects
-                     where t1.SubjectsID == sessSub// identifier comparison 
-                     select t1.DepartmentsID).FirstOrDefault();
+                           where t1.SubjectsID == sessSub// identifier comparison 
+                           select t1.DepartmentsID).FirstOrDefault();
             var query = 0;
             if (deptSub > 0)
             {
                 query = (from t2 in _context.DepartmentStaff
-                             where t2.StaffID == sessStaff
-                             && t2.DepartmentsID == deptSub
-                             select t2.DepartmentsID).FirstOrDefault();
+                         where t2.StaffID == sessStaff
+                         && t2.DepartmentsID == deptSub
+                         select t2.DepartmentsID).FirstOrDefault();
             }
-            if (query == 0||deptSub == 0)
+            if (query == 0 || deptSub == 0)
             {
                 ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
                 ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
                 ModelState.AddModelError("Custom", " This Staff has not been assigned to Department of the subject you selected ");
                 return Page();
-             
+
             }
-           Sessions staff = (from t1 in _context.Sessions where t1.StaffID == Sessions.StaffID && t1.Day == Sessions.Day && t1.Period== Sessions.Period select t1).FirstOrDefault();
-            if (staff != null)
+            Sessions teacher = (from t1 in _context.Sessions where t1.StaffID == Sessions.StaffID && t1.Day == Sessions.Day && t1.Period == Sessions.Period select t1).FirstOrDefault();
+            if (teacher != null)
             {
                 ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
                 ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
@@ -79,13 +75,13 @@ namespace AvcolStaff.Pages.SessionS
                 ModelState.AddModelError("Custom", "This room is occupied at this time. Please choose another room");
                 return Page();
             }
-            
-                _context.Sessions.Add(Sessions);
-                await _context.SaveChangesAsync();
-  
+
+            _context.Sessions.Add(Sessions);
+            await _context.SaveChangesAsync();
+
             return RedirectToPage("./Index");
         }
 
-        }
- }   
+    }
+}
 

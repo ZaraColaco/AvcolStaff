@@ -28,7 +28,5 @@ namespace AvcolStaff.Models
         public string Time { get; set; }
         public Subjects Subjects { get; set; }
         public Staff Staff { get; set; }
-
-
     }
 }

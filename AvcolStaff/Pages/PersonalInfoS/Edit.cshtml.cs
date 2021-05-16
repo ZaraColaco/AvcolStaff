@@ -27,6 +27,7 @@ namespace AvcolStaff.Pages.PersonalInfoS
         [BindProperty]
         public int Ethnicity { get; set; }
 
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -41,7 +42,7 @@ namespace AvcolStaff.Pages.PersonalInfoS
             {
                 return NotFound();
             }
-            ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FirstName");
+            ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
             return Page();
         }
 
@@ -92,3 +93,4 @@ namespace AvcolStaff.Pages.PersonalInfoS
         }
     }
 }
+

@@ -13,18 +13,22 @@ namespace AvcolStaff.Pages.PersonalInfoS
     public class DetailsModel : PageModel
     {
         private readonly AvcolStaff.Data.AvcolStaffContext _context;
-        public string CitizenS;
+
         public DetailsModel(AvcolStaff.Data.AvcolStaffContext context)
         {
             _context = context;
         }
 
         public PersonalInformation PersonalInformation { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            PersonalInformation = await _context.PersonalInformation
-                .Include(p => p.Staff).FirstOrDefaultAsync(m => m.StaffID == id);
+            PersonalInformation = await _context.PersonalInformation.FirstOrDefaultAsync(m => m.StaffID == id);
 
             if (PersonalInformation == null)
             {

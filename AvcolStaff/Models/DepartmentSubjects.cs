@@ -16,5 +16,6 @@ namespace AvcolStaff.Models
         public int? SubjectsID { get; set; }
         public Subjects Subjects { get; set; }
         public Departments Departments { get; set; }
+
     }
 }

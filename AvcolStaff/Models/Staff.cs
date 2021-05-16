@@ -34,9 +34,8 @@ namespace AvcolStaff.Models
             }
         }
         public Rating Rating { get; set; }
-        public Sessions Sessions { get; set; }
         public PersonalInformation PersonalInformation { get; set; }
-        public ICollection<Departments> Departments { get; set; }
+
 
 
     }

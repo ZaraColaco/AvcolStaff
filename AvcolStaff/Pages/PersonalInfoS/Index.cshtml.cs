@@ -23,8 +23,7 @@ namespace AvcolStaff.Pages.PersonalInfoS
 
         public async Task OnGetAsync()
         {
-            PersonalInformation = await _context.PersonalInformation
-                .Include(p => p.Staff).ToListAsync();
+            PersonalInformation = await _context.PersonalInformation.ToListAsync();
         }
     }
 }

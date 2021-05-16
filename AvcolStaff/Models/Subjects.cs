@@ -13,6 +13,9 @@ namespace AvcolStaff.Models
         [Required]
         [StringLength(5, ErrorMessage = "Invalid Subject Name. Length cannot be longer than 5 characters e.g 12MAT, 13BIO")]
         public string SubjectName { get; set; }
-        public Sessions Sessions { get; set; }
+        //public ICollection<Sessions> Sessions { get; set; }
+        //public int DepartmentsID { get; set; }
+        //[Display(Name = "Subject Name")]
+        //public ICollection<Departments> Departments { get; set; }      
     }
 }

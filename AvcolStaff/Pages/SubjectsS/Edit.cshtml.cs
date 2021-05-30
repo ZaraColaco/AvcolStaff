@@ -30,12 +30,14 @@ namespace AvcolStaff.Pages.SubjectsS
                 return NotFound();
             }
 
-            Subjects = await _context.Subjects.FirstOrDefaultAsync(m => m.SubjectsID == id);
+            Subjects = await _context.Subjects
+                .Include(s => s.Departments).FirstOrDefaultAsync(m => m.SubjectsID == id);
 
             if (Subjects == null)
             {
                 return NotFound();
             }
+           ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
             return Page();
         }
 
@@ -47,19 +49,13 @@ namespace AvcolStaff.Pages.SubjectsS
             {
                 return Page();
             }
-            Subjects subject = (from t1 in _context.Subjects where t1.SubjectName == Subjects.SubjectName select t1).FirstOrDefault();
-            _context.Subjects.Add(Subjects);
+            Subjects subject = (from t1 in _context.Subjects where t1.SubjectsID !=Subjects.SubjectsID && t1.SubjectName == Subjects.SubjectName select t1).FirstOrDefault();
             if (subject != null)
             {
+                ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
                 ModelState.AddModelError("Custom", "Subject already exists");
                 return Page();
             }
-            else
-            {
-                _context.Subjects.Add(Subjects);
-                await _context.SaveChangesAsync();
-            }
-
             _context.Attach(Subjects).State = EntityState.Modified;
 
             try

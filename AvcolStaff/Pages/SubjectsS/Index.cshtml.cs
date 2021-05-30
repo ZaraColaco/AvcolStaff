@@ -23,7 +23,8 @@ namespace AvcolStaff.Pages.SubjectsS
 
         public async Task OnGetAsync()
         {
-            Subjects = await _context.Subjects.ToListAsync();
+            Subjects = await _context.Subjects
+                .Include(s => s.Departments).ToListAsync();
         }
     }
 }

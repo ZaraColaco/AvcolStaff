@@ -21,7 +21,9 @@ namespace AvcolStaff.Pages.SubjectsS
 
         public IActionResult OnGet()
         {
+            ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
             return Page();
+
         }
 
         [BindProperty]
@@ -39,6 +41,7 @@ namespace AvcolStaff.Pages.SubjectsS
             _context.Subjects.Add(Subjects);
             if (subject != null)
             {
+                ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
                 ModelState.AddModelError("Custom", "Subject already exists");
                 return Page();
             }
@@ -49,7 +52,6 @@ namespace AvcolStaff.Pages.SubjectsS
             }
             return RedirectToPage("./Index");
         }
-            
+
     }
 }
-

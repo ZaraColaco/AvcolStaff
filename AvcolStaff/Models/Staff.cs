@@ -33,7 +33,6 @@ namespace AvcolStaff.Models
                 return LastName + " " + FirstName;
             }
         }
-        public Rating Rating { get; set; }
         public PersonalInformation PersonalInformation { get; set; }
 
 

@@ -29,31 +29,12 @@ namespace AvcolStaff.Migrations
                 {
                     SubjectsID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectName = table.Column<string>(maxLength: 5, nullable: false)
+                    SubjectName = table.Column<string>(maxLength: 5, nullable: false),
+                    DepartmentsID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Subjects", x => x.SubjectsID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Departments",
-                columns: table => new
-                {
-                    DepartmentsID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DepartmentName = table.Column<string>(maxLength: 35, nullable: false),
-                    StaffID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Departments", x => x.DepartmentsID);
-                    table.ForeignKey(
-                        name: "FK_Departments_Staff_StaffID",
-                        column: x => x.StaffID,
-                        principalTable: "Staff",
-                        principalColumn: "StaffID",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,6 +78,26 @@ namespace AvcolStaff.Migrations
                         principalTable: "Staff",
                         principalColumn: "StaffID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Departments",
+                columns: table => new
+                {
+                    DepartmentsID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DepartmentName = table.Column<string>(maxLength: 35, nullable: false),
+                    SubjectsID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Departments", x => x.DepartmentsID);
+                    table.ForeignKey(
+                        name: "FK_Departments_Subjects_SubjectsID",
+                        column: x => x.SubjectsID,
+                        principalTable: "Subjects",
+                        principalColumn: "SubjectsID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,9 +183,9 @@ namespace AvcolStaff.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Departments_StaffID",
+                name: "IX_Departments_SubjectsID",
                 table: "Departments",
-                column: "StaffID");
+                column: "SubjectsID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DepartmentStaff_DepartmentsID",
@@ -209,14 +210,12 @@ namespace AvcolStaff.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Sessions_StaffID",
                 table: "Sessions",
-                column: "StaffID",
-                unique: true);
+                column: "StaffID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sessions_SubjectsID",
                 table: "Sessions",
-                column: "SubjectsID",
-                unique: true);
+                column: "SubjectsID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -240,10 +239,10 @@ namespace AvcolStaff.Migrations
                 name: "Departments");
 
             migrationBuilder.DropTable(
-                name: "Subjects");
+                name: "Staff");
 
             migrationBuilder.DropTable(
-                name: "Staff");
+                name: "Subjects");
         }
     }
 }

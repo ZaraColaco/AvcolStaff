@@ -29,7 +29,8 @@ namespace AvcolStaff.Pages.SubjectsS
                 return NotFound();
             }
 
-            Subjects = await _context.Subjects.FirstOrDefaultAsync(m => m.SubjectsID == id);
+            Subjects = await _context.Subjects
+                .Include(s => s.Departments).FirstOrDefaultAsync(m => m.SubjectsID == id);
 
             if (Subjects == null)
             {

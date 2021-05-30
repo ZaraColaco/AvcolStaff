@@ -54,7 +54,7 @@ namespace AvcolStaff.Pages.SessionS
             }
             int sessSub = Sessions.SubjectsID;
             int sessStaff = Sessions.StaffID;
-            int deptSub = (from t1 in _context.DepartmentSubjects
+            int deptSub = (from t1 in _context.Subjects
                            where t1.SubjectsID == sessSub// any identifier comparison can be done here
                            select t1.DepartmentsID).FirstOrDefault();
 

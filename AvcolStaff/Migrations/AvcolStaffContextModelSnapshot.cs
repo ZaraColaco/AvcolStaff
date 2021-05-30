@@ -75,12 +75,12 @@ namespace AvcolStaff.Migrations
                         .HasColumnType("nvarchar(35)")
                         .HasMaxLength(35);
 
-                    b.Property<int?>("StaffID")
+                    b.Property<int?>("SubjectsID")
                         .HasColumnType("int");
 
                     b.HasKey("DepartmentsID");
 
-                    b.HasIndex("StaffID");
+                    b.HasIndex("SubjectsID");
 
                     b.ToTable("Departments");
                 });
@@ -172,11 +172,9 @@ namespace AvcolStaff.Migrations
 
                     b.HasKey("SessionsID");
 
-                    b.HasIndex("StaffID")
-                        .IsUnique();
+                    b.HasIndex("StaffID");
 
-                    b.HasIndex("SubjectsID")
-                        .IsUnique();
+                    b.HasIndex("SubjectsID");
 
                     b.ToTable("Sessions");
                 });
@@ -215,6 +213,9 @@ namespace AvcolStaff.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DepartmentsID")
+                        .HasColumnType("int");
 
                     b.Property<string>("SubjectName")
                         .IsRequired()
@@ -256,9 +257,9 @@ namespace AvcolStaff.Migrations
 
             modelBuilder.Entity("AvcolStaff.Models.Departments", b =>
                 {
-                    b.HasOne("AvcolStaff.Models.Staff", null)
+                    b.HasOne("AvcolStaff.Models.Subjects", null)
                         .WithMany("Departments")
-                        .HasForeignKey("StaffID");
+                        .HasForeignKey("SubjectsID");
                 });
 
             modelBuilder.Entity("AvcolStaff.Models.PersonalInformation", b =>
@@ -282,14 +283,14 @@ namespace AvcolStaff.Migrations
             modelBuilder.Entity("AvcolStaff.Models.Sessions", b =>
                 {
                     b.HasOne("AvcolStaff.Models.Staff", "Staff")
-                        .WithOne("Sessions")
-                        .HasForeignKey("AvcolStaff.Models.Sessions", "StaffID")
+                        .WithMany()
+                        .HasForeignKey("StaffID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AvcolStaff.Models.Subjects", "Subjects")
-                        .WithOne("Sessions")
-                        .HasForeignKey("AvcolStaff.Models.Sessions", "SubjectsID")
+                        .WithMany("Sessions")
+                        .HasForeignKey("SubjectsID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

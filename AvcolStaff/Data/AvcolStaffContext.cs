@@ -20,7 +20,6 @@ namespace AvcolStaff.Data
 
         public DbSet<AvcolStaff.Models.Departments> Departments { get; set; }
 
-        public DbSet<AvcolStaff.Models.Rating> Rating { get; set; }
 
         public DbSet<AvcolStaff.Models.PersonalInformation> PersonalInformation { get; set; }
 
@@ -29,7 +28,6 @@ namespace AvcolStaff.Data
 
         public DbSet<AvcolStaff.Models.DepartmentStaff> DepartmentStaff { get; set; }
 
-        public DbSet<AvcolStaff.Models.DepartmentSubjects> DepartmentSubjects { get; set; }
 
 
     }

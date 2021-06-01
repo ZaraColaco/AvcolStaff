@@ -41,17 +41,29 @@
             </div>
             <div class="form-group">
                 <label asp-for="PersonalInformation.CitizenStatus" class="control-label"></label>
-                <input asp-for="PersonalInformation.CitizenStatus" class="form-control" />
+                <select select asp-for="PersonalInformation.CitizenStatus" class="form-control" name="PersonalInformation.CitizenStatus">
+                    <option value="">Select one</option>
+                    <option value="1">NZ Citizen </option>
+                    <option value="2">Other</option>
+                </select>
                 <span asp-validation-for="PersonalInformation.CitizenStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PersonalInformation.Ethnicity" class="control-label"></label>
-                <input asp-for="PersonalInformation.Ethnicity" class="form-control" />
+                <select select asp-for="PersonalInformation.Ethnicity" class="form-control" name="PersonalInformation.Ethnicity">
+                    <option value="">Select one</option>
+                    <option value="1">NZ Citizen </option>
+                    <option value="2">Australian</option>
+                    <option value="3">Indian</option>
+                    <option value="4">Pacifica</option>
+                    <option value="5">British</option>
+                    <option value="6">other</option>
+                </select>
                 <span asp-validation-for="PersonalInformation.Ethnicity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PersonalInformation.EmailAddress" class="control-label"></label>
-                <input asp-for="PersonalInformation.EmailAddress" class="form-control" />
+                <input asp-for="PersonalInformation.EmailAddress" readonly class="form-control" />
                 <span asp-validation-for="PersonalInformation.EmailAddress" class="text-danger"></span>
             </div>
             <div class="form-group">

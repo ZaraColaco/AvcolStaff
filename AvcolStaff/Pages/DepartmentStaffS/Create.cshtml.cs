@@ -23,8 +23,12 @@ namespace AvcolStaff.Pages.DepartmentStaffS
         {
             ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
             ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+            //var query = (from t1 in _context.DepartmentStaff
+            //             select t1).Distinct();
             return Page();
+           
         }
+       
 
         [BindProperty]
         public DepartmentStaff DepartmentStaff { get; set; }

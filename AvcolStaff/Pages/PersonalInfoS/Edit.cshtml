@@ -7,7 +7,7 @@
 
 <h1>Edit</h1>
 
-<h4>PersonalInformation</h4>
+<h4>Personal Information</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -43,21 +43,20 @@
                 <label asp-for="PersonalInformation.CitizenStatus" class="control-label"></label>
                 <select select asp-for="PersonalInformation.CitizenStatus" class="form-control" name="PersonalInformation.CitizenStatus">
                     <option value="">Select one</option>
-                    <option value="1">NZ Citizen </option>
-                    <option value="2">Other</option>
+                    <option value="NZ">NZ</option>
+                    <option value="Other">Other</option>
                 </select>
                 <span asp-validation-for="PersonalInformation.CitizenStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PersonalInformation.Ethnicity" class="control-label"></label>
-                <select select asp-for="PersonalInformation.Ethnicity" class="form-control" name="PersonalInformation.Ethnicity">
-                    <option value="">Select one</option>
-                    <option value="1">NZ Citizen </option>
-                    <option value="2">Australian</option>
-                    <option value="3">Indian</option>
-                    <option value="4">Pacifica</option>
-                    <option value="5">British</option>
-                    <option value="6">other</option>
+                <option value="">Select one</option>
+                <option value="New Zealander">New Zealander </option>
+                <option value="Australian">Australian</option>
+                <option value="Indian">Indian</option>
+                <option value="Pacifica">Pacifica</option>
+                <option value="British">British</option>
+                <option value="Other">Other</option>
                 </select>
                 <span asp-validation-for="PersonalInformation.Ethnicity" class="text-danger"></span>
             </div>

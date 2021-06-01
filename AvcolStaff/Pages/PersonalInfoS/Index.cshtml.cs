@@ -19,11 +19,12 @@ namespace AvcolStaff.Pages.PersonalInfoS
             _context = context;
         }
 
-        public IList<PersonalInformation> PersonalInformation { get;set; }
+        public IList<PersonalInformation> PersonalInformation { get; set; }
 
         public async Task OnGetAsync()
         {
-            PersonalInformation = await _context.PersonalInformation.ToListAsync();
+            PersonalInformation = await _context.PersonalInformation
+                .Include(p => p.Staff).ToListAsync();
         }
     }
 }

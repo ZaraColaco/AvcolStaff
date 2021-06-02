@@ -18,11 +18,11 @@ namespace AvcolStaff.Pages.PersonalInfoS
         {
             _context = context;
         }
-
         public PersonalInformation PersonalInformation { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+
 
             if (id == null)
             {

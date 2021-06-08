@@ -49,15 +49,48 @@ namespace AvcolStaff.Pages.SubjectsS
             {
                 return Page();
             }
-            Subjects subject = (from t1 in _context.Subjects where t1.SubjectsID !=Subjects.SubjectsID && t1.SubjectName == Subjects.SubjectName select t1).FirstOrDefault();
-            if (subject != null)
+            if (Subjects.SubjectName.Length != 5)
             {
                 ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
-                ModelState.AddModelError("Custom", "Subject already exists");
+                ModelState.AddModelError("Custom", "Invalid subject name (Please eneter a 0 before any single digit number)");
                 return Page();
             }
-            _context.Attach(Subjects).State = EntityState.Modified;
+            else
+            {
+                String[] validSubPart1 = { "09", "10", "11", "12", "13" };
+                var subName = Subjects.SubjectName.Substring(0,2);
+                if (validSubPart1.Contains(subName))
+                {
+                    char[] chars = Subjects.SubjectName.Substring(2, 3).ToCharArray();
+                    foreach (char c in chars)
+                    {
+                        if (!char.IsLetter(c))
+                        {
 
+                            ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
+                            ModelState.AddModelError("Custom", "Invalid Subject name e.g 13MAT");
+                            return Page();
+
+                        }
+                    }
+
+                }
+                else
+                {
+                    ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
+                    ModelState.AddModelError("Custom", "Invalid Subject name e.g 13MAT");
+                    return Page();
+
+                }
+                Subjects subject = (from t1 in _context.Subjects where t1.SubjectsID != Subjects.SubjectsID && t1.SubjectName == Subjects.SubjectName select t1).FirstOrDefault();
+                if (subject != null)
+                {
+                    ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
+                    ModelState.AddModelError("Custom", "Subject already exists");
+                    return Page();
+                }
+                _context.Attach(Subjects).State = EntityState.Modified;
+            }
             try
             {
                 await _context.SaveChangesAsync();

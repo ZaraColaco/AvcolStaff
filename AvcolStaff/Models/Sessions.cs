@@ -16,7 +16,7 @@ namespace AvcolStaff.Models
         [Required]
         public int SubjectsID { get; set; }
         [Required]
-        [Display(Name = "Room Number")]
+        [Display(Name = "Room")]
         [StringLength(3, ErrorMessage = "Invalid room number")]
         public string RoomNumber { get; set; }
         [Range(1,5,ErrorMessage = "Please choose a number between 1 and 5 (inclusive)")]

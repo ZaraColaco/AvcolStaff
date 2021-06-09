@@ -52,7 +52,7 @@ namespace AvcolStaff.Pages.SubjectsS
             if (Subjects.SubjectName.Length != 5)
             {
                 ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
-                ModelState.AddModelError("Custom", "Invalid subject name (Please eneter a 0 before any single digit number)");
+                ModelState.AddModelError("Custom", "Invalid Subject name (Please eneter a 0 before any single digit number e.g 09MAT)");
                 return Page();
             }
             else
@@ -68,7 +68,7 @@ namespace AvcolStaff.Pages.SubjectsS
                         {
 
                             ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
-                            ModelState.AddModelError("Custom", "Invalid Subject name e.g 13MAT");
+                            ModelState.AddModelError("Custom", "Please check that a three letter combination depicting the subject name follows the year level e.g 13MAT");
                             return Page();
 
                         }
@@ -78,7 +78,7 @@ namespace AvcolStaff.Pages.SubjectsS
                 else
                 {
                     ViewData["DepartmentsID"] = new SelectList(_context.Departments, "DepartmentsID", "DepartmentName");
-                    ModelState.AddModelError("Custom", "Invalid Subject name e.g 13MAT");
+                    ModelState.AddModelError("Custom", "Invalid Subject name (Please eneter a 0 before any single digit number e.g 09MAT)");
                     return Page();
 
                 }

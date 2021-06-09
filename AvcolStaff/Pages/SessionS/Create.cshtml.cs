@@ -38,6 +38,7 @@ namespace AvcolStaff.Pages.SessionS
                 return Page();
             }
 
+
             int sessSub = Sessions.SubjectsID;
             int sessStaff = Sessions.StaffID;
             int deptSub = (from t1 in _context.Subjects
@@ -67,6 +68,106 @@ namespace AvcolStaff.Pages.SessionS
                 ModelState.AddModelError("Custom", "Staff is booked for another class at this time. Please choose another staff or try changing the time");
                 return Page();
             }
+            String[] validRoomPart1 = { "A", "B", "C", "D", "E", "F" };
+            bool validRoom = true;
+            var roomName = Sessions.RoomNumber.Substring(0, 1);
+            if (validRoomPart1.Contains(roomName))
+            {
+                char[] chars = Sessions.RoomNumber.Substring(1, Sessions.RoomNumber.Length-1).ToCharArray();
+                int roomNum = Int32.Parse(Sessions.RoomNumber.Substring(1, Sessions.RoomNumber.Length - 1));
+                foreach (char c in chars)
+                {
+                    if (!char.IsDigit(c))
+                    {
+                        validRoom = false;
+                    }
+                    else if(roomName == "A")
+                    {
+                        if (roomNum < 1 || roomNum > 46)
+                        {
+                            validRoom = false;
+                        }
+                        else
+                        {
+                            validRoom = true;
+                            break;
+                        }
+                    }
+                    else if (roomName == "B")
+                    {
+                        if (roomNum < 1 || roomNum > 17)
+                        {
+                            validRoom = false;
+                        }
+                        else
+                        {
+                            validRoom = true;
+                            break;
+                        }
+                    }
+                    else if (roomName == "C")
+                    {
+                        if (roomNum < 1 || roomNum > 29)
+                        {
+                            validRoom = false;
+                        }
+                        else
+                        {
+                            validRoom = true;
+                            break;
+                        }
+                    }
+                    else if (roomName == "D")
+                    {
+                        if (roomNum < 1 ||roomNum > 29)
+                        {
+                            validRoom = false;
+                        }
+                        else
+                        {
+                            validRoom = true;
+                            break;
+                        }
+                    }
+                    else if (roomName == "E")
+                    {
+                        if (roomNum < 1 || roomNum > 12)
+                        {
+                            validRoom = false;
+                        }
+                        else
+                        {
+                            validRoom = true;
+                            break;
+                        }
+                    }
+                    else if (roomName == "F")
+                    {
+                        if (roomNum < 1 && roomNum >14)
+                        {
+                            validRoom = false;
+                        }
+                        else
+                        {
+                            validRoom = true;
+                            break;
+                        }
+                    }
+
+                }
+            }
+            else
+            {
+                validRoom = false;
+            }
+            if (validRoom == false)
+            {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ViewData["SubjectsID"] = new SelectList(_context.Subjects, "SubjectsID", "SubjectName");
+                ModelState.AddModelError("Custom", "Invalid Room Name e.g A46");
+                return Page();
+            }
+
             Sessions room = (from t1 in _context.Sessions where t1.RoomNumber == Sessions.RoomNumber && t1.Day == Sessions.Day && t1.Period == Sessions.Period select t1).FirstOrDefault();
             if (room != null)
             {

@@ -38,25 +38,25 @@ namespace AvcolStaff.Pages.StaffS
             }
             var staffName = (from t1 in _context.Staff
                              where t1.FirstName == Staff.FirstName && t1.LastName == Staff.LastName
-                             select t1).FirstOrDefault();
+                             select t1).FirstOrDefault();//Checks if a staff with the same fist and last name already exists
             if (staffName != null)
             {
-                ModelState.AddModelError("Custom", " Staff already exists");
+                ModelState.AddModelError("Custom", " Staff already exists");//Displays error message
                 return Page();
             }
             var LName = Staff.LastName;
             var TeacherCD = " ";
             Staff staff = null;
-            for (int f = 0; f < Staff.FirstName.Length; f++)
+            for (int f = 0; f < Staff.FirstName.Length; f++)//
             {
-                var TCode = Staff.FirstName.Substring(f, 1).ToUpper();
-                for (int i = 0; i < LName.Length - 1; i++)
+                var TCode = Staff.FirstName.Substring(f, 1).ToUpper();//First letter of the First name in uppercase
+                for (int i = 0; i < LName.Length - 1; i++)//for every pair of letters in the last name keeping checking untill a unique combination of letters is achievied 
                 {
                     TeacherCD = TCode + LName.Substring(i, 2).ToUpper();
                     staff = (from t1 in _context.Staff
                              where t1.TeacherCode == TeacherCD
                              select t1).FirstOrDefault();
-                    if (staff == null)
+                    if (staff == null)//if its unique come out of the loop
                     {
                         break;
                     }
@@ -67,7 +67,7 @@ namespace AvcolStaff.Pages.StaffS
                     break;
                 }
             }
-            if (staff == null)
+            if (staff != null)
             {
                 for (int i = 0; i < LName.Length - 1; i++)
                 {

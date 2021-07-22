@@ -35,6 +35,7 @@ namespace AvcolStaff.Pages.PersonalInfoS
         // more details, see https://aka.ms/RazorPagesCRUD.
         private DateTime EarlyDate = new DateTime(1950, 01, 01);
         private DateTime LateDate = new DateTime(1999, 01, 01);
+
         public async Task<IActionResult> OnPostAsync()
         {
             Staff staff = (from t1 in _context.Staff where t1.StaffID == PersonalInformation.StaffID select t1).FirstOrDefault();
@@ -50,7 +51,18 @@ namespace AvcolStaff.Pages.PersonalInfoS
                 ModelState.AddModelError("Custom", "Invalid Date of Birth");
                 return Page();
             }
-
+            if (PersonalInformation.PhoneNumber.Length != 10)
+            {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ModelState.AddModelError("Custom", "Invalid Phone Number");
+                return Page();
+            }
+            if (PersonalInformation.EmergencyContact.Length != 10)
+            {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ModelState.AddModelError("Custom", "Invalid Emergency Contact Number");
+                return Page();
+            }
             PersonalInformation pInfo = (from t1 in _context.PersonalInformation where t1.StaffID == PersonalInformation.StaffID select t1).FirstOrDefault();
             if (pInfo != null)
             {

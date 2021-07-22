@@ -61,9 +61,16 @@ namespace AvcolStaff.Pages.PersonalInfoS
                 ModelState.AddModelError("Custom", "Invalid Date of Birth");
                 return Page();
             }
-            if (!PersonalInformation.EmailAddress.EndsWith("@avcol.school.nz"))
+            if (PersonalInformation.PhoneNumber.Length != 10)
             {
-                ModelState.AddModelError("Custom", "Email Domain is incorrect please enter an email address with the correct avcol domain");
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ModelState.AddModelError("Custom", "Invalid Phone Number");
+                return Page();
+            }
+            if (PersonalInformation.EmergencyContact.Length != 10)
+            {
+                ViewData["StaffID"] = new SelectList(_context.Staff, "StaffID", "FullName");
+                ModelState.AddModelError("Custom", "Invalid Emergency Contact Number");
                 return Page();
             }
             _context.Attach(PersonalInformation).State = EntityState.Modified;

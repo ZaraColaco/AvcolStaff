@@ -84,7 +84,7 @@ namespace AvcolStaff.Pages.SessionS
             }
             String[] validRoomPart1 = { "A", "B", "C", "D", "E", "F" };
             bool validRoom = true;
-            var roomName = Sessions.RoomNumber.Substring(0, 1);
+            var roomName = Sessions.RoomNumber.ToUpper().Substring(0, 1);
             if (validRoomPart1.Contains(roomName))
             {
                 char[] chars = Sessions.RoomNumber.Substring(1, Sessions.RoomNumber.Length - 1).ToCharArray();

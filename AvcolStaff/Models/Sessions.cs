@@ -24,7 +24,6 @@ namespace AvcolStaff.Models
         public int Period { get; set; }
         [Required]
         public DayOfWeek Day { get; set; }
-        [Required]
         public string Time { get; set; }
         public Subjects Subjects { get; set; }
         public Staff Staff { get; set; }

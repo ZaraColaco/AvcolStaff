@@ -12,10 +12,9 @@ namespace AvcolStaff.Models
         [Display(Name = "Staff Name")]
         [Required]
         public int StaffID { get; set; }
-        [Display(Name = "Department Name")]
+        [Display(Name = "Department")]
         [Required]
         public int DepartmentsID { get; set; }
-        [Display(Name = "Subject Name")]
         public Staff Staff { get; set; }
         public Departments Departments { get; set; }
 
